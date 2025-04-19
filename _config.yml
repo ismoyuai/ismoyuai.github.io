@@ -99,14 +99,14 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 # theme: butterfly
-theme: butterfly
+theme: matery
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
   repo: git@github.com:ismoyuai/ismoyuai.github.io.git	
-  branch: main
+  branch: master
 
 # Mathjax
 kramed:
