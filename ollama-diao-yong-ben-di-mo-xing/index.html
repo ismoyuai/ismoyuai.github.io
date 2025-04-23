@@ -27,7 +27,7 @@
     
     <style>
         body{
-            background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+            background-image: url(https://pic1.imgdb.cn/item/680901b758cb8da5c8c6b23f.webp);
             background-repeat:no-repeat;
             background-size: 100% 100%;
             background-attachment:fixed;
@@ -363,6 +363,14 @@
                                 <span class="chip bg-color">linux</span>
                             </a>
                         
+                            <a href="/tags/LLaMa/">
+                                <span class="chip bg-color">LLaMa</span>
+                            </a>
+                        
+                            <a href="/tags/LoRA/">
+                                <span class="chip bg-color">LoRA</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -433,19 +441,19 @@
 <p>如果下载速度很慢，可以开启学术加速</p>
 <h3 id="开启学术加速"><a href="#开启学术加速" class="headerlink" title="开启学术加速:"></a>开启学术加速:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/network_turbo</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="取消学术加速"><a href="#取消学术加速" class="headerlink" title="取消学术加速:"></a>取消学术加速:</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset http_proxy &amp;&amp; unset https_proxy</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="取消学术加速"><a href="#取消学术加速" class="headerlink" title="取消学术加速:"></a>取消学术加速:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> http_proxy &amp;&amp; <span class="built_in">unset</span> https_proxy</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="Ollama安装模型："><a href="#Ollama安装模型：" class="headerlink" title="Ollama安装模型："></a>Ollama安装模型：</h2><h3 id="下载模型"><a href="#下载模型" class="headerlink" title="下载模型"></a>下载模型</h3><p>以 llama3.2:1b 模型为例，运行下面命令：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:1b</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:1b</span><br></pre></td></tr></tbody></table></figure>
 
 <p>等待命令结束。</p>
 <h3 id="使用模型"><a href="#使用模型" class="headerlink" title="使用模型"></a>使用模型</h3><p>ollama使用模型有两种方式，一种通过终端命令使用，一种通过python代码使用，两种方式都需要首先开启ollama服务</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama serve</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama serve</span><br></pre></td></tr></tbody></table></figure>
 
 
 
 <h4 id="1-通过终端使用"><a href="#1-通过终端使用" class="headerlink" title="1.通过终端使用"></a>1.通过终端使用</h4><p>终端运行命令：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:1b</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:1b</span><br></pre></td></tr></tbody></table></figure>
 
 <p>终端会进入对话模式，这时输入你要问的问题即可使用模型。</p>
 <h4 id="2-通过python代码使用模型"><a href="#2-通过python代码使用模型" class="headerlink" title="2.通过python代码使用模型"></a>2.通过python代码使用模型</h4><p>安装 openai 包</p>
@@ -537,6 +545,14 @@
                                     <span class="chip bg-color">linux</span>
                                 </a>
                             
+                                <a href="/tags/LLaMa/">
+                                    <span class="chip bg-color">LLaMa</span>
+                                </a>
+                            
+                                <a href="/tags/LoRA/">
+                                    <span class="chip bg-color">LoRA</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -580,73 +596,9 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/llama3-wei-diao/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="LLaMa3微调">
-                        
-                        <span class="card-title">LLaMa3微调</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-23
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-category">
-                                    AI大模型应用
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ollama/">
-                        <span class="chip bg-color">ollama</span>
-                    </a>
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
-                    </a>
-                    
-                    <a href="/tags/LLaMa3/">
-                        <span class="chip bg-color">LLaMa3</span>
-                    </a>
-                    
-                    <a href="/tags/LoRA/">
-                        <span class="chip bg-color">LoRA</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
                 <a href="/ollama-diao-yong-ben-di-mo-xing/">
@@ -694,6 +646,79 @@
                     
                     <a href="/tags/linux/">
                         <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/LLaMa/">
+                        <span class="chip bg-color">LLaMa</span>
+                    </a>
+                    
+                    <a href="/tags/LoRA/">
+                        <span class="chip bg-color">LoRA</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/llama3-wei-diao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="LLaMa3微调">
+                        
+                        <span class="card-title">LLaMa3微调</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-category">
+                                    AI大模型应用
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ollama/">
+                        <span class="chip bg-color">ollama</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/LLaMa/">
+                        <span class="chip bg-color">LLaMa</span>
+                    </a>
+                    
+                    <a href="/tags/LoRA/">
+                        <span class="chip bg-color">LoRA</span>
                     </a>
                     
                 </div>
@@ -773,6 +798,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 
