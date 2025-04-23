@@ -4,8 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="test, AI,Python,C,C++,Linux">
-    <meta name="description" content="">
+    <meta name="keywords" content="Ollama调用本地模型, AI,Python,C,C++,Linux">
+    <meta name="description" content="Linux安装Ollama安装命令：1curl -fsSL https://ollama.com/install.sh | sh
+
+如果下载速度很慢，可以开启学术加速
+开启学术加速:1source /etc/network_turbo
+
+取">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>test | 墨宇Logic</title>
+    <title>Ollama调用本地模型 | 墨宇Logic</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -47,9 +52,7 @@
 
 
 
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
     <link rel="stylesheet" href="/css/post.css">
-
 
 
 
@@ -321,12 +324,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/source/images/xxx.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">test</h1>
+                    <h1 class="description center-align post-title">Ollama调用本地模型</h1>
                 </div>
             </div>
         </div>
@@ -336,24 +339,43 @@
 
 
 
-<main class="post-container content">
+<main class="container content">
 
     
-    <div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
+    <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ollama/">
+                                <span class="chip bg-color">ollama</span>
+                            </a>
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-category">
+                                AI大模型应用
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -362,28 +384,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-04-19
+                    2025-04-23
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-04-19
+                    2025-04-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    482
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -406,7 +428,40 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="Linux安装Ollama"><a href="#Linux安装Ollama" class="headerlink" title="Linux安装Ollama"></a>Linux安装Ollama</h1><h2 id="安装命令："><a href="#安装命令：" class="headerlink" title="安装命令："></a>安装命令：</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://ollama.com/install.sh | sh</span><br></pre></td></tr></tbody></table></figure>
+
+<p>如果下载速度很慢，可以开启学术加速</p>
+<h3 id="开启学术加速"><a href="#开启学术加速" class="headerlink" title="开启学术加速:"></a>开启学术加速:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/network_turbo</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="取消学术加速"><a href="#取消学术加速" class="headerlink" title="取消学术加速:"></a>取消学术加速:</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset http_proxy &amp;&amp; unset https_proxy</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Ollama安装模型："><a href="#Ollama安装模型：" class="headerlink" title="Ollama安装模型："></a>Ollama安装模型：</h2><h3 id="下载模型"><a href="#下载模型" class="headerlink" title="下载模型"></a>下载模型</h3><p>以 llama3.2:1b 模型为例，运行下面命令：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:1b</span><br></pre></td></tr></tbody></table></figure>
+
+<p>等待命令结束。</p>
+<h3 id="使用模型"><a href="#使用模型" class="headerlink" title="使用模型"></a>使用模型</h3><p>ollama使用模型有两种方式，一种通过终端命令使用，一种通过python代码使用，两种方式都需要首先开启ollama服务</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama serve</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h4 id="1-通过终端使用"><a href="#1-通过终端使用" class="headerlink" title="1.通过终端使用"></a>1.通过终端使用</h4><p>终端运行命令：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:1b</span><br></pre></td></tr></tbody></table></figure>
+
+<p>终端会进入对话模式，这时输入你要问的问题即可使用模型。</p>
+<h4 id="2-通过python代码使用模型"><a href="#2-通过python代码使用模型" class="headerlink" title="2.通过python代码使用模型"></a>2.通过python代码使用模型</h4><p>安装 openai 包</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opeani</span><br></pre></td></tr></tbody></table></figure>
+
+<p>python代码简单调用</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过openai接口调用模型，导入模型地址，和api_key</span></span><br><span class="line">client = OpenAI(base_url=<span class="string">"http://localhost:11434/v1/"</span>,api_key=<span class="string">"ollama"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提示词模板，并输入用户问题，指定使用模型名字</span></span><br><span class="line">responce=client.chat.completions.create(</span><br><span class="line">    messages= [{<span class="string">"role"</span>:<span class="string">"user"</span>,<span class="string">"content"</span>:<span class="string">"你好!你是谁？你是由谁创造的？"</span>}],model=<span class="string">"llama3.2:1B"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印结果</span></span><br><span class="line"><span class="built_in">print</span>(responce.choices[<span class="number">0</span>])</span><br></pre></td></tr></tbody></table></figure>
+
+<p>base_url：启动<code>ollama serve</code>后会给出地址和端口，一般为<a target="_blank" rel="noopener" href="http://localhost:11434/">http://localhost:11434</a></p>
+<p>api_key：为ollama，因为使用的ollama框架</p>
+<p>简单多轮对话框架调用：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#多轮对话</span></span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义多轮对话方法</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run_chat_session</span>():</span><br><span class="line">    <span class="comment">#初始化客户端</span></span><br><span class="line">    client = OpenAI(base_url=<span class="string">"http://localhost:11434/v1/"</span>,api_key=<span class="string">"ollama"</span>)</span><br><span class="line">    <span class="comment">#初始化对话历史</span></span><br><span class="line">    chat_history = []</span><br><span class="line">    <span class="comment">#启动多轮对话</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="comment">#获取用户输入</span></span><br><span class="line">        user_input = <span class="built_in">input</span>(<span class="string">"用户："</span>)</span><br><span class="line">        <span class="keyword">if</span> user_input.lower()==<span class="string">"exit"</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"退出对话"</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="comment">#更新对话历史（添加用户输入）</span></span><br><span class="line">        chat_history.append({<span class="string">"role"</span>:<span class="string">"user"</span>,<span class="string">"content"</span>:user_input})</span><br><span class="line">        <span class="comment">#调用模型回答</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            chat_complition = client.chat.completions.create(messages=chat_history,model=<span class="string">"llama3.2:1b"</span>)</span><br><span class="line">            <span class="comment">#获取最新回答</span></span><br><span class="line">            moedl_responce = chat_complition.choices[<span class="number">0</span>]</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"AI："</span>,moedl_responce.message.content)</span><br><span class="line">            <span class="comment">#更新对话历史（添加AI模型的回复）</span></span><br><span class="line">            chat_history.append({<span class="string">"role"</span>:<span class="string">"assistant"</span>,<span class="string">"content"</span>:moedl_responce.message.content})</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"发生错误："</span>,e)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run_chat_session()</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
                 
             </div>
             <hr/>
@@ -432,7 +487,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ismoyuai.github.io/test/">https://ismoyuai.github.io/test/</a>
+                    <a href="https://ismoyuai.github.io/ollama-diao-yong-ben-di-mo-xing/">https://ismoyuai.github.io/ollama-diao-yong-ben-di-mo-xing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -469,7 +524,19 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/ollama/">
+                                    <span class="chip bg-color">ollama</span>
+                                </a>
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -513,18 +580,16 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/test/">
+                <a href="/llama3-wei-diao/">
                     <div class="card-image">
                         
+                        <img src="/source/images/xxx.png" class="responsive-img" alt="LLaMa3微调">
                         
-                        <img src="/medias/featureimages/10.png" class="responsive-img" alt="test">
-                        
-                        <span class="card-title">test</span>
+                        <span class="card-title">LLaMa3微调</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -534,18 +599,45 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-19
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-23
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            墨宇Logic
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-category">
+                                    AI大模型应用
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ollama/">
+                        <span class="chip bg-color">ollama</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/LLaMa3/">
+                        <span class="chip bg-color">LLaMa3</span>
+                    </a>
+                    
+                    <a href="/tags/LoRA/">
+                        <span class="chip bg-color">LoRA</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -553,16 +645,15 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/hello-world/">
+                <a href="/ollama-diao-yong-ben-di-mo-xing/">
                     <div class="card-image">
                         
+                        <img src="/source/images/xxx.png" class="responsive-img" alt="Ollama调用本地模型">
                         
-                        <img src="/medias/featureimages/8.png" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">Ollama调用本地模型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -573,15 +664,36 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-23
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            墨宇Logic
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-category">
+                                    AI大模型应用
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ollama/">
+                        <span class="chip bg-color">ollama</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -655,87 +767,6 @@
 
 
 
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
     
 
 </main>
@@ -760,7 +791,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">73</span>
+                        class="white-color">1.3k</span>
             
             
             
