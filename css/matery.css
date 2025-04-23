@@ -592,9 +592,9 @@ header .go-back i {
     font-size: 2.5rem;
     font-weight: 400;
 }
-
+/*
 @-webkit-keyframes rainbow {
-
+/* 动态切换背景颜色.即滤镜颜色，不想要可以全部注释，或者换成你喜欢的颜色 *
     0%,
     100% {
         background: rgba(156, 39, 176, 0.75);
@@ -638,9 +638,10 @@ header .go-back i {
         background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
     }
 }
-
+*/
+/*
 @keyframes rainbow {
-
+/* 动态切换背景颜色.，不想要可以全部注释，或者换成你喜欢的颜色 *
     0%,
     100% {
         background: rgba(156, 39, 176, 0.75);
@@ -684,7 +685,7 @@ header .go-back i {
         background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
     }
 }
-
+*/
 .index-card {
     margin-top: -10px;
     padding-top: 20px;
