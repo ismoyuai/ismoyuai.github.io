@@ -482,9 +482,9 @@
                     var typed = new Typed("#subtitle", {
                         strings: [ 
                             
-                                "从来没有真正的绝境, 只有心灵的迷途",
+                                "世界上只有一种真正的英雄主义，那就是在认清生活的真相后依然热爱生活。",
                             
-                                "Never really desperate, only the lost of the soul",
+                                "读书使人明智，要用自己的头脑做武器，在这艰难的时间里开辟出一条道路来！",
                             
                         ],
                         startDelay: 300,
@@ -575,6 +575,60 @@
                     </span>
                 </a>
                 
+                
+                <a href="/tags/vllm/" title="vllm: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="vllm" style="background-color: #F8F9F9;">vllm
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/LLaMA-Factory/" title="LLaMA-Factory: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="LLaMA-Factory" style="background-color: #82E0AA;">LLaMA-Factory
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Python/" title="Python: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Python" style="background-color: #D7BDE2;">Python
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/PyTorch/" title="PyTorch: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="PyTorch" style="background-color: #A3E4D7;">PyTorch
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/css/" title="css: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="css" style="background-color: #85C1E9;">css
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Markdown/" title="Markdown: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Markdown" style="background-color: #F8C471;">Markdown
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
             </div>
         </div>
     </div>
@@ -599,7 +653,7 @@
 <script type="text/javascript">
     
 
-    $('#tag-wordcloud').jQCloud([{"text":"ollama","weight":2,"link":"/tags/ollama/"},{"text":"python","weight":2,"link":"/tags/python/"},{"text":"linux","weight":2,"link":"/tags/linux/"},{"text":"LLaMa","weight":2,"link":"/tags/LLaMa/"},{"text":"LoRA","weight":2,"link":"/tags/LoRA/"}], {
+    $('#tag-wordcloud').jQCloud([{"text":"ollama","weight":2,"link":"/tags/ollama/"},{"text":"python","weight":2,"link":"/tags/python/"},{"text":"linux","weight":2,"link":"/tags/linux/"},{"text":"LLaMa","weight":2,"link":"/tags/LLaMa/"},{"text":"LoRA","weight":2,"link":"/tags/LoRA/"},{"text":"vllm","weight":1,"link":"/tags/vllm/"},{"text":"LLaMA-Factory","weight":1,"link":"/tags/LLaMA-Factory/"},{"text":"Python","weight":1,"link":"/tags/Python/"},{"text":"PyTorch","weight":1,"link":"/tags/PyTorch/"},{"text":"css","weight":1,"link":"/tags/css/"},{"text":"Markdown","weight":1,"link":"/tags/Markdown/"}], {
         autoResize: true
     });
 </script>
@@ -623,10 +677,12 @@
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">1.3k</span>
+                        class="white-color">11.9k</span>
             
             
             
@@ -890,6 +946,17 @@ $(function () {
 
     
 
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "https://ismoyuai.github.io"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
     
     
     

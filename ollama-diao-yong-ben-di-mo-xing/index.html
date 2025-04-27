@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Ollama调用本地模型, AI,Python,C,C++,Linux">
-    <meta name="description" content="Linux安装Ollama安装命令：1curl -fsSL https://ollama.com/install.sh | sh
+    <meta name="description" content="Linux安装Ollama安装命令：curl -fsSL https://ollama.com/install.sh | sh
 
 如果下载速度很慢，可以开启学术加速
-开启学术加速:1source /etc/network_turbo
+开启学术加速:source /etc/network_turbo
 
-取">
+取消学">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -52,7 +52,9 @@
 
 
 
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
     <link rel="stylesheet" href="/css/post.css">
+
 
 
 
@@ -485,10 +487,12 @@
 
 
 
-<main class="container content">
+<main class="post-container content">
 
     
-    <!-- 文章内容详情 -->
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
@@ -525,8 +529,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-category">
-                                AI大模型应用
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                AI大模型应用开发
                             </a>
                         
                     </div>
@@ -545,14 +549,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-04-23
+                    2025-04-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    482
+                    483
                 </div>
                 
 
@@ -582,36 +586,78 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Linux安装Ollama"><a href="#Linux安装Ollama" class="headerlink" title="Linux安装Ollama"></a>Linux安装Ollama</h1><h2 id="安装命令："><a href="#安装命令：" class="headerlink" title="安装命令："></a>安装命令：</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://ollama.com/install.sh | sh</span><br></pre></td></tr></tbody></table></figure>
+                <h1 id="Linux安装Ollama"><a href="#Linux安装Ollama" class="headerlink" title="Linux安装Ollama"></a>Linux安装Ollama</h1><h2 id="安装命令："><a href="#安装命令：" class="headerlink" title="安装命令："></a>安装命令：</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://ollama.com/install.sh <span class="token operator">|</span> <span class="token function">sh</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果下载速度很慢，可以开启学术加速</p>
-<h3 id="开启学术加速"><a href="#开启学术加速" class="headerlink" title="开启学术加速:"></a>开启学术加速:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/network_turbo</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="开启学术加速"><a href="#开启学术加速" class="headerlink" title="开启学术加速:"></a>开启学术加速:</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> /etc/network_turbo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="取消学术加速"><a href="#取消学术加速" class="headerlink" title="取消学术加速:"></a>取消学术加速:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> http_proxy &amp;&amp; <span class="built_in">unset</span> https_proxy</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="取消学术加速"><a href="#取消学术加速" class="headerlink" title="取消学术加速:"></a>取消学术加速:</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">unset</span> http_proxy <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">unset</span> https_proxy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="Ollama安装模型："><a href="#Ollama安装模型：" class="headerlink" title="Ollama安装模型："></a>Ollama安装模型：</h2><h3 id="下载模型"><a href="#下载模型" class="headerlink" title="下载模型"></a>下载模型</h3><p>以 llama3.2:1b 模型为例，运行下面命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:1b</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama run llama3.2:1b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>等待命令结束。</p>
 <h3 id="使用模型"><a href="#使用模型" class="headerlink" title="使用模型"></a>使用模型</h3><p>ollama使用模型有两种方式，一种通过终端命令使用，一种通过python代码使用，两种方式都需要首先开启ollama服务</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama serve</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama serve<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
 <h4 id="1-通过终端使用"><a href="#1-通过终端使用" class="headerlink" title="1.通过终端使用"></a>1.通过终端使用</h4><p>终端运行命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run llama3.2:1b</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama run llama3.2:1b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>终端会进入对话模式，这时输入你要问的问题即可使用模型。</p>
 <h4 id="2-通过python代码使用模型"><a href="#2-通过python代码使用模型" class="headerlink" title="2.通过python代码使用模型"></a>2.通过python代码使用模型</h4><p>安装 openai 包</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opeani</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> opeani<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>python代码简单调用</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过openai接口调用模型，导入模型地址，和api_key</span></span><br><span class="line">client = OpenAI(base_url=<span class="string">"http://localhost:11434/v1/"</span>,api_key=<span class="string">"ollama"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提示词模板，并输入用户问题，指定使用模型名字</span></span><br><span class="line">responce=client.chat.completions.create(</span><br><span class="line">    messages= [{<span class="string">"role"</span>:<span class="string">"user"</span>,<span class="string">"content"</span>:<span class="string">"你好!你是谁？你是由谁创造的？"</span>}],model=<span class="string">"llama3.2:1B"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印结果</span></span><br><span class="line"><span class="built_in">print</span>(responce.choices[<span class="number">0</span>])</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> openai <span class="token keyword">import</span> OpenAI
+
+<span class="token comment"># 通过openai接口调用模型，导入模型地址，和api_key</span>
+client <span class="token operator">=</span> OpenAI<span class="token punctuation">(</span>base_url<span class="token operator">=</span><span class="token string">"http://localhost:11434/v1/"</span><span class="token punctuation">,</span>api_key<span class="token operator">=</span><span class="token string">"ollama"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 提示词模板，并输入用户问题，指定使用模型名字</span>
+responce<span class="token operator">=</span>client<span class="token punctuation">.</span>chat<span class="token punctuation">.</span>completions<span class="token punctuation">.</span>create<span class="token punctuation">(</span>
+    messages<span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span><span class="token string">"user"</span><span class="token punctuation">,</span><span class="token string">"content"</span><span class="token punctuation">:</span><span class="token string">"你好!你是谁？你是由谁创造的？"</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>model<span class="token operator">=</span><span class="token string">"llama3.2:1B"</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 打印结果</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>responce<span class="token punctuation">.</span>choices<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>base_url：启动<code>ollama serve</code>后会给出地址和端口，一般为<a target="_blank" rel="noopener" href="http://localhost:11434/">http://localhost:11434</a></p>
 <p>api_key：为ollama，因为使用的ollama框架</p>
 <p>简单多轮对话框架调用：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#多轮对话</span></span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义多轮对话方法</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run_chat_session</span>():</span><br><span class="line">    <span class="comment">#初始化客户端</span></span><br><span class="line">    client = OpenAI(base_url=<span class="string">"http://localhost:11434/v1/"</span>,api_key=<span class="string">"ollama"</span>)</span><br><span class="line">    <span class="comment">#初始化对话历史</span></span><br><span class="line">    chat_history = []</span><br><span class="line">    <span class="comment">#启动多轮对话</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="comment">#获取用户输入</span></span><br><span class="line">        user_input = <span class="built_in">input</span>(<span class="string">"用户："</span>)</span><br><span class="line">        <span class="keyword">if</span> user_input.lower()==<span class="string">"exit"</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"退出对话"</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="comment">#更新对话历史（添加用户输入）</span></span><br><span class="line">        chat_history.append({<span class="string">"role"</span>:<span class="string">"user"</span>,<span class="string">"content"</span>:user_input})</span><br><span class="line">        <span class="comment">#调用模型回答</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            chat_complition = client.chat.completions.create(messages=chat_history,model=<span class="string">"llama3.2:1b"</span>)</span><br><span class="line">            <span class="comment">#获取最新回答</span></span><br><span class="line">            moedl_responce = chat_complition.choices[<span class="number">0</span>]</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"AI："</span>,moedl_responce.message.content)</span><br><span class="line">            <span class="comment">#更新对话历史（添加AI模型的回复）</span></span><br><span class="line">            chat_history.append({<span class="string">"role"</span>:<span class="string">"assistant"</span>,<span class="string">"content"</span>:moedl_responce.message.content})</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"发生错误："</span>,e)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run_chat_session()</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#多轮对话</span>
+<span class="token keyword">from</span> openai <span class="token keyword">import</span> OpenAI
+
+<span class="token comment">#定义多轮对话方法</span>
+<span class="token keyword">def</span> <span class="token function">run_chat_session</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment">#初始化客户端</span>
+    client <span class="token operator">=</span> OpenAI<span class="token punctuation">(</span>base_url<span class="token operator">=</span><span class="token string">"http://localhost:11434/v1/"</span><span class="token punctuation">,</span>api_key<span class="token operator">=</span><span class="token string">"ollama"</span><span class="token punctuation">)</span>
+    <span class="token comment">#初始化对话历史</span>
+    chat_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token comment">#启动多轮对话</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        <span class="token comment">#获取用户输入</span>
+        user_input <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"用户："</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> user_input<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token string">"exit"</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"退出对话"</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+        <span class="token comment">#更新对话历史（添加用户输入）</span>
+        chat_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span><span class="token string">"user"</span><span class="token punctuation">,</span><span class="token string">"content"</span><span class="token punctuation">:</span>user_input<span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token comment">#调用模型回答</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            chat_complition <span class="token operator">=</span> client<span class="token punctuation">.</span>chat<span class="token punctuation">.</span>completions<span class="token punctuation">.</span>create<span class="token punctuation">(</span>messages<span class="token operator">=</span>chat_history<span class="token punctuation">,</span>model<span class="token operator">=</span><span class="token string">"llama3.2:1b"</span><span class="token punctuation">)</span>
+            <span class="token comment">#获取最新回答</span>
+            moedl_responce <span class="token operator">=</span> chat_complition<span class="token punctuation">.</span>choices<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AI："</span><span class="token punctuation">,</span>moedl_responce<span class="token punctuation">.</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span>
+            <span class="token comment">#更新对话历史（添加AI模型的回复）</span>
+            chat_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span><span class="token string">"assistant"</span><span class="token punctuation">,</span><span class="token string">"content"</span><span class="token punctuation">:</span>moedl_responce<span class="token punctuation">.</span>message<span class="token punctuation">.</span>content<span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"发生错误："</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    run_chat_session<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -742,18 +788,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/ollama-diao-yong-ben-di-mo-xing/">
+                <a href="/ji-yu-llama-factory-de-llama3.2-1b-mo-xing-wei-diao-ruo-zhi-ba-shu-ju-ji-quan-liu-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Ollama调用本地模型">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程">
                         
-                        <span class="card-title">Ollama调用本地模型</span>
+                        <span class="card-title">基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -763,43 +808,38 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-23
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-25
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-category">
-                                    AI大模型应用
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                    AI大模型应用开发
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ollama/">
-                        <span class="chip bg-color">ollama</span>
+                    <a href="/tags/vllm/">
+                        <span class="chip bg-color">vllm</span>
                     </a>
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/LLaMA-Factory/">
+                        <span class="chip bg-color">LLaMA-Factory</span>
                     </a>
                     
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
                     </a>
                     
-                    <a href="/tags/LLaMa/">
-                        <span class="chip bg-color">LLaMa</span>
-                    </a>
-                    
-                    <a href="/tags/LoRA/">
-                        <span class="chip bg-color">LoRA</span>
+                    <a href="/tags/PyTorch/">
+                        <span class="chip bg-color">PyTorch</span>
                     </a>
                     
                 </div>
@@ -836,8 +876,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-category">
-                                    AI大模型应用
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                    AI大模型应用开发
                                 </a>
                             
                             
@@ -940,6 +980,87 @@
 
 
 
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
     
 
 </main>
@@ -968,10 +1089,12 @@
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">1.3k</span>
+                        class="white-color">11.9k</span>
             
             
             
@@ -1235,6 +1358,17 @@ $(function () {
 
     
 
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "https://ismoyuai.github.io"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
     
     
     
