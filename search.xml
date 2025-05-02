@@ -57,13 +57,13 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
-            <tag> PyTorch </tag>
-            
             <tag> vllm </tag>
             
             <tag> LLaMA-Factory </tag>
+            
+            <tag> Python </tag>
+            
+            <tag> PyTorch </tag>
             
         </tags>
       
