@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程, AI,Python,C,C++,Linux">
-    <meta name="description" content="一、项目背景在大模型应用学习中，学习到LLaMA-Factory模型微调框架，于是打算自己来根据LLaMA-Factory框架完整的微调一遍大模型来当作练习，选择基地模型和数据集分别是 Unichat-llama3.2-Chinese-1B">
+    <meta name="description" content="基于LLaMA-Factory模型微调框架，使用Unichat-llama3.2-Chinese-1B 和 弱智吧数据集 来进行模型微调训练、评估、量化、导出实现全过程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -496,20 +496,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/vllm/">
-                                <span class="chip bg-color">vllm</span>
-                            </a>
-                        
-                            <a href="/tags/LLaMA-Factory/">
-                                <span class="chip bg-color">LLaMA-Factory</span>
-                            </a>
-                        
                             <a href="/tags/Python/">
                                 <span class="chip bg-color">Python</span>
                             </a>
                         
                             <a href="/tags/PyTorch/">
                                 <span class="chip bg-color">PyTorch</span>
+                            </a>
+                        
+                            <a href="/tags/vllm/">
+                                <span class="chip bg-color">vllm</span>
+                            </a>
+                        
+                            <a href="/tags/LLaMA-Factory/">
+                                <span class="chip bg-color">LLaMA-Factory</span>
                             </a>
                         
                     </div>
@@ -540,21 +540,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-04-27
+                    2025-05-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    3.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    14 分
                 </div>
                 
 
@@ -631,12 +631,10 @@ ds <span class="token operator">=</span>  MsDataset<span class="token punctuatio
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> json
 
 <span class="token comment"># 读取ruozhiba_qaswift.json文件</span>
-
 <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">r"\data\ruozhiba_qaswift.json"</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
     data <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
 
 <span class="token comment"># 转换格式</span>
-
 converted_data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 <span class="token keyword">for</span> item <span class="token keyword">in</span> data<span class="token punctuation">:</span>
     converted_item <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -647,11 +645,10 @@ converted_data <span class="token operator">=</span> <span class="token punctuat
     converted_data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>converted_item<span class="token punctuation">)</span>
 
 <span class="token comment"># 保存为新的JSON文件</span>
-
 <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'converted_file.json'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
     json<span class="token punctuation">.</span>dump<span class="token punctuation">(</span>converted_data<span class="token punctuation">,</span> f<span class="token punctuation">,</span> ensure_ascii<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> indent<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> sort_keys<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
 
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"转换完成！转换后的数据已保存为 converted_file.json"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"转换完成！转换后的数据已保存为 converted_file.json"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>将转换后的json文件重命名为<code>ruozhiba_qaswift.json</code></p>
 <p>到此我们的模型和数据集就已经准备好了，接下来就是连接服务器准备开始训练</p>
@@ -664,30 +661,25 @@ converted_data <span class="token operator">=</span> <span class="token punctuat
 <p><img src="https://pic1.imgdb.cn/item/680b702358cb8da5c8cc77f5.png" alt="服务器root目录内容"></p>
 <h2 id="五、安装LLaMA-Factory"><a href="#五、安装LLaMA-Factory" class="headerlink" title="五、安装LLaMA-Factory"></a>五、安装LLaMA-Factory</h2><p>下面我们安装<code>LLaMA-Factory</code>,我们安装在root目录下的<code>autodl-tmp</code>，这是服务器数据盘</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 进入autodl-tmp目录</span>
-
 <span class="token builtin class-name">cd</span> autodl-tmp/
 
 <span class="token comment"># AutoDL 学术加速</span>
-
 <span class="token builtin class-name">source</span> /etc/network_turbo
 
 <span class="token comment"># 下载LLaMA-Factory仓库</span>
-
 <span class="token function">git</span> clone https://github.com/hiyouga/LLaMA-Factory.git
 
-<span class="token comment"># 安装vllm</span>
+<span class="token comment"># 安装auto-gptq量化包，要先于vllm安装，且auto-gptq量化包需要 PyTorch2.2.1+cuda121 版本</span>
+pip <span class="token function">install</span> auto-gptq
 
-pip <span class="token function">install</span> <span class="token parameter variable">-e</span> .<span class="token punctuation">[</span><span class="token string">"vllm"</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 进入LLaMA-Factory文件夹</span>
+<span class="token builtin class-name">cd</span> LLaMA-Factory
+
+<span class="token comment"># 安装vllm</span>
+pip <span class="token function">install</span> <span class="token parameter variable">-e</span> .<span class="token punctuation">[</span><span class="token string">"vllm"</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>下载完成后<code>LLaMA-Factory</code>目录内容如下：</p>
 <p><img src="https://pic1.imgdb.cn/item/680b7b0658cb8da5c8ccbcc9.png" alt="LLaMA-Factory目录内容"></p>
-<p>我们进入<code>LLaMA-Factory</code>目录</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 进入LLaMA-Factory目录</span>
-<span class="token builtin class-name">cd</span> LLaMA-Factory
-
-<span class="token comment"># 安装LLaMA-Factory所需的依赖</span>
-pip <span class="token function">install</span> <span class="token parameter variable">-e</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>全部安装完成后，我们将准备好的模型和数据集上传到服务器，将<code>ruozhiba_qaswift.json</code>文件放到<code>LLaMA-Factory</code>目录的<code>data</code>目录下，如图位置：</p>
 <p><img src="https://pic1.imgdb.cn/item/680b7b0658cb8da5c8ccbcca.png" alt="ruozhiba_qaswift.json文件位置"></p>
 <p>然后打开<code>LLaMA-Factory</code>目录的<code>data</code>目录下的<code>dataset_info.json</code>文件，在这里我们配置我们的数据集信息，在文件开始部分添加如下内容：</p>
@@ -731,7 +723,6 @@ llamafactory-cli webui
 <p><img src="https://pic1.imgdb.cn/item/680b844158cb8da5c8cce0c8.png" alt="Train参数配置部分"></p>
 <p>本次训练所配置参数就上面这些，其他这次保持默认。</p>
 <p>我们点击开始，等待训练，我们这次训练轮次设置的为1000。</p>
-<div class="">
 <div class="alert alert-success">
 <b>模型继续训练：有两种方法，一种是将模型和最新保存的权重文件合并后设置训练参数然后继续训练，另一种是不合并直接设置训练参数然后继续训练。</b>
 </div>
@@ -796,9 +787,8 @@ llamafactory-cli webui<span aria-hidden="true" class="line-numbers-rows"><span><
     <img src="https://pic1.imgdb.cn/item/680c529858cb8da5c8ce1d1a.png">
 </figure>
 这里模型训练效果都感觉一般，我推测是因为选择的基座模型的原因，后续可以换一个基座模型在测试一遍，这次先将流程走完。
-### 6.4 模型导出
 
-<p>我们先将模型合并，然后在进行模型量化导出，模型导出设置如下，我们用1000轮的权重来进行模型合并</p>
+<h3 id="6-4-模型合并导出"><a href="#6-4-模型合并导出" class="headerlink" title="6.4 模型合并导出"></a>6.4 模型合并导出</h3><p>我们先将模型合并，然后在进行模型量化导出，模型导出设置如下，我们用1000轮的权重来进行模型合并</p>
 <p><img src="https://pic1.imgdb.cn/item/680c908358cb8da5c8cec05f.png" alt="模型导出设置"></p>
 <h3 id="6-5-模型量化导出"><a href="#6-5-模型量化导出" class="headerlink" title="6.5 模型量化导出"></a>6.5 模型量化导出</h3><p>将我们上面导出的模型文件加载进来，量化导出设置如下：</p>
 <p><img src="https://pic1.imgdb.cn/item/680c908358cb8da5c8cec05e.png" alt="量化模型导出设置"></p>
@@ -814,7 +804,55 @@ llamafactory-cli webui<span aria-hidden="true" class="line-numbers-rows"><span><
 </figure>
 
 <p>所以目前量化一般量化到4位和8位。</p>
-<h3 id="6-5-模型评估"><a href="#6-5-模型评估" class="headerlink" title="6.5 模型评估"></a>6.5 模型评估</h3><p>待续…….</p>
+<h3 id="6-5-模型评估"><a href="#6-5-模型评估" class="headerlink" title="6.5 模型评估"></a>6.5 模型评估</h3><p>我们首先准备好测试数据集，这次我们先从<code>ruozhiba_qaswift.json</code>文件中取一部分数据从来作为我们的测试数据集,在<code>LLaMA-Factory/data</code>目录下面新建<code>ruozhiba_qaswift_test.json</code>文件，复制一部分<code>ruozhiba_qaswift.json</code>中的数据到<code>ruozhiba_qaswift_test.json</code>文件中，然后在<code>dataset_info.json</code>文件中配置<code>ruozhiba_qaswift_test.json</code>文件，准备好后我们开始模型评估。</p>
+<p>我们导入基座模型，设置好我们要评估的权重，然后进入<code>Evaluate &amp; Predict</code>界面，参数设置如下图：</p>
+<p><img src="https://pic1.imgdb.cn/item/68102dc658cb8da5c8d2b9f1.png" alt="模型评估设置"></p>
+<p>我们点击开始评估，这时会要求我们安装几个评估要用的包，我们依次根据提示安装即可</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> jieba
+pip <span class="token function">install</span> nltk
+pip <span class="token function">install</span> rouge_chinese<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>包安装完成后，模型评估开始，评估结果如下：</p>
+<p>训练1000轮权重的模型评估得分：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"predict_bleu-4"</span><span class="token operator">:</span> <span class="token number">25.71370314171123</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_model_preparation_time"</span><span class="token operator">:</span> <span class="token number">0.0023</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_rouge-1"</span><span class="token operator">:</span> <span class="token number">48.205860895721926</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_rouge-2"</span><span class="token operator">:</span> <span class="token number">27.524134157754013</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_rouge-l"</span><span class="token operator">:</span> <span class="token number">41.42147493315508</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_runtime"</span><span class="token operator">:</span> <span class="token number">347.7339</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_samples_per_second"</span><span class="token operator">:</span> <span class="token number">4.302</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_steps_per_second"</span><span class="token operator">:</span> <span class="token number">0.359</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>训练3100轮的模型评估得分：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"predict_bleu-4"</span><span class="token operator">:</span> <span class="token number">92.7214736631016</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_model_preparation_time"</span><span class="token operator">:</span> <span class="token number">0.0024</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_rouge-1"</span><span class="token operator">:</span> <span class="token number">95.9076695855615</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_rouge-2"</span><span class="token operator">:</span> <span class="token number">94.5167354946524</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_rouge-l"</span><span class="token operator">:</span> <span class="token number">95.47345046791445</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_runtime"</span><span class="token operator">:</span> <span class="token number">318.3357</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_samples_per_second"</span><span class="token operator">:</span> <span class="token number">4.699</span><span class="token punctuation">,</span>
+    <span class="token property">"predict_steps_per_second"</span><span class="token operator">:</span> <span class="token number">0.393</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这是一段 JSON 格式数据，用于表示模型预测性能的相关指标。以下是各字段的解释：</p>
+<ul>
+<li>predict_bleu4: BLEU-4 得分。</li>
+<li>predict_model_preparation_time: 模型准备时间</li>
+<li>predict_rouge1: ROUGE-1 得分</li>
+<li>predict_rouge2: ROUGE-2 得分</li>
+<li>predict_rougel: ROUGE-L 得分</li>
+<li>predict_runtime: 总运行时间</li>
+<li>predict_samples_per_second: 每秒处理样本数</li>
+<li>predict_steps_per_second: 每秒处理步骤数</li>
+</ul>
+<p>这些指标用于评估模型性能，帮助优化。（详细资料可参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45573296/article/details/141333719">BLEU、ROUGE详解-语言模型的常用评价指标-举例附代码实现</a></p>
+<p>可以看出这次训练1000轮的效果其实并不好，评分都较低，和我们主观测试的结果差不多，而训练3100轮的效果就不错，得分较高。</p>
+<h3 id="6-6-关于QLoRA"><a href="#6-6-关于QLoRA" class="headerlink" title="6.6 关于QLoRA"></a>6.6 关于QLoRA</h3><p>QLoRA是一种优于LoRA训练的一个手段，QLoRA可以帮助我们在一定程度上降低训练时显存需要，而不像量化导出那样损失较大参数，并且可以加快训练速度，所以训练可以使用QLoRA来进行，</p>
+<p>开启QLoRA训练的一些设置：<br><img src="https://pic1.imgdb.cn/item/681033bd58cb8da5c8d2d9b4.png" alt="QLoRA设置"></p>
+<p><img src="https://pic1.imgdb.cn/item/681033bd58cb8da5c8d2d9b3.png" alt="QLoRA设置"></p>
 <h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h3 id="在AutoDL服务器中安装pip-install-auto-gptq-包出现报错"><a href="#在AutoDL服务器中安装pip-install-auto-gptq-包出现报错" class="headerlink" title="在AutoDL服务器中安装pip install auto-gptq 包出现报错"></a>在AutoDL服务器中安装pip install auto-gptq 包出现报错</h3><pre class="line-numbers language-root@autodl-container-3fac46b1d9-74c33bae:~/autodl-tmp/LLaMA-Factory#" data-language="root@autodl-container-3fac46b1d9-74c33bae:~/autodl-tmp/LLaMA-Factory#"><div class="caption"><span>pip install auto-gptq</span></div><code class="language-root@autodl-container-3fac46b1d9-74c33bae:~/autodl-tmp/LLaMA-Factory#">Looking in indexes: http://mirrors.aliyun.com/pypi/simple
 Collecting auto-gptq
   Using cached http://mirrors.aliyun.com/pypi/packages/90/e5/b22697903982284fe284568fb2663a2196694a8eee637f5cf4ccfe435a38/auto_gptq-0.7.1.tar.gz (126 kB)
@@ -860,7 +898,7 @@ error: metadata-generation-failed
 
 note: This is an issue with the package mentioned above, not pip.
 hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</div>
+
                 
             </div>
             <hr/>
@@ -924,20 +962,20 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/vllm/">
-                                    <span class="chip bg-color">vllm</span>
-                                </a>
-                            
-                                <a href="/tags/LLaMA-Factory/">
-                                    <span class="chip bg-color">LLaMA-Factory</span>
-                                </a>
-                            
                                 <a href="/tags/Python/">
                                     <span class="chip bg-color">Python</span>
                                 </a>
                             
                                 <a href="/tags/PyTorch/">
                                     <span class="chip bg-color">PyTorch</span>
+                                </a>
+                            
+                                <a href="/tags/vllm/">
+                                    <span class="chip bg-color">vllm</span>
+                                </a>
+                            
+                                <a href="/tags/LLaMA-Factory/">
+                                    <span class="chip bg-color">LLaMA-Factory</span>
                                 </a>
                             
                         </div>
@@ -983,18 +1021,17 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/ji-yu-llama-factory-de-llama3.2-1b-mo-xing-wei-diao-ruo-zhi-ba-shu-ju-ji-quan-liu-cheng/">
+                <a href="/ji-yu-llama.cpp-de-mo-xing-zhuan-huan-wei-gguf-ge-shi-ollama-bu-shu-open-webui-bu-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程">
+                        <img src="/medias/featureimages/0.png" class="responsive-img" alt="">
                         
-                        <span class="card-title">基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1004,31 +1041,22 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-25
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-28
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
-                                    AI大模型应用开发
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            墨宇Logic
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/vllm/">
-                        <span class="chip bg-color">vllm</span>
-                    </a>
-                    
-                    <a href="/tags/LLaMA-Factory/">
-                        <span class="chip bg-color">LLaMA-Factory</span>
+                    <a href="/tags/ollama/">
+                        <span class="chip bg-color">ollama</span>
                     </a>
                     
                     <a href="/tags/Python/">
@@ -1037,6 +1065,22 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
                     
                     <a href="/tags/PyTorch/">
                         <span class="chip bg-color">PyTorch</span>
+                    </a>
+                    
+                    <a href="/tags/huggingface/">
+                        <span class="chip bg-color">huggingface</span>
+                    </a>
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/open-webui/">
+                        <span class="chip bg-color">open-webui</span>
+                    </a>
+                    
+                    <a href="/tags/llama-cpp/">
+                        <span class="chip bg-color">llama_cpp</span>
                     </a>
                     
                 </div>
@@ -1284,7 +1328,7 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">11.9k</span>
+                        class="white-color">14.3k</span>
             
             
             
