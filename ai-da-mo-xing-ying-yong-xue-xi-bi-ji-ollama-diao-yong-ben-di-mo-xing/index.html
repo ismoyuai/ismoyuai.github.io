@@ -4,8 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: css, AI,Python,C,C++,Linux">
-    <meta name="description" content="这里是墨宇的个人博客">
+    <meta name="keywords" content="【AI大模型应用学习笔记】Ollama调用本地模型, AI,Python,C,C++,Linux">
+    <meta name="description" content="Linux安装Ollama安装命令：curl -fsSL https://ollama.com/install.sh | sh
+
+如果下载速度很慢，可以开启学术加速
+开启学术加速:source /etc/network_turbo
+
+取消学">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签: css | 墨宇Logic</title>
+    <title>【AI大模型应用学习笔记】Ollama调用本地模型 | 墨宇Logic</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -47,9 +52,7 @@
 
 
 
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
     <link rel="stylesheet" href="/css/post.css">
-
 
 
 
@@ -463,280 +466,527 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                墨宇Logic
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "世界上只有一种真正的英雄主义，那就是在认清生活的真相后依然热爱生活。",
-                            
-                                "读书使人明智，要用自己的头脑做武器，在这艰难的时间里开辟出一条道路来！",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">【AI大模型应用学习笔记】Ollama调用本地模型</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.png';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-<script>
-    
-      var bannerUrl = "/medias/featureimages/" + Math.floor(Math.random() * 26) + '.png';
-    
-    $('.bg-cover.about-cover').css('background-image', 'url(' + bannerUrl + ')');
-
-</script>
 
 
-    </div>
-</div>
-
-<main class="content">
+<main class="container content">
 
     
-
-<div id="tags" class="container chip-container">
+    <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ollama/">
+                                <span class="chip bg-color">ollama</span>
+                            </a>
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/LLaMa/">
+                                <span class="chip bg-color">LLaMa</span>
+                            </a>
+                        
+                            <a href="/tags/LoRA/">
+                                <span class="chip bg-color">LoRA</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                AI大模型应用开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
             </div>
-            <div class="tag-chips">
+
+            <div class="post-info">
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-04-23
+                </div>
                 
-                <a href="/tags/ollama/" title="ollama: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="ollama" style="background-color: #F9EBEA;">ollama
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
+
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-05-07
+                </div>
                 
-                <a href="/tags/Python/" title="Python: 6">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Python" style="background-color: #F5EEF8;">Python
-                        <span class="tag-length">6</span>
-                    </span>
-                </a>
+
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    483
+                </div>
                 
-                <a href="/tags/Linux/" title="Linux: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Linux" style="background-color: #D5F5E3;">Linux
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
+
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
                 
-                <a href="/tags/LLaMa/" title="LLaMa: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="LLaMa" style="background-color: #E8F8F5;">LLaMa
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
+
                 
-                
-                <a href="/tags/LoRA/" title="LoRA: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="LoRA" style="background-color: #FEF9E7;">LoRA
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/css/" title="css: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="css" style="background-color: #F8F9F9;">css
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Markdown/" title="Markdown: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Markdown" style="background-color: #82E0AA;">Markdown
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/vllm/" title="vllm: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="vllm" style="background-color: #D7BDE2;">vllm
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/PyTorch/" title="PyTorch: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="PyTorch" style="background-color: #A3E4D7;">PyTorch
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/OpenCompass/" title="OpenCompass: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="OpenCompass" style="background-color: #85C1E9;">OpenCompass
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/RAG/" title="RAG: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="RAG" style="background-color: #F8C471;">RAG
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Embeddings/" title="Embeddings: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Embeddings" style="background-color: #F9E79F;">Embeddings
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/OpenAI/" title="OpenAI: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="OpenAI" style="background-color: #F8F9F9;">OpenAI
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/LLaMA-Factory/" title="LLaMA-Factory: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="LLaMA-Factory" style="background-color: #F8C471;">LLaMA-Factory
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/huggingface/" title="huggingface: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="huggingface" style="background-color: #FFF;">huggingface
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/open-webui/" title="open-webui: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="open-webui" style="background-color: #F8C471;">open-webui
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/llama-cpp/" title="llama_cpp: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="llama_cpp" style="background-color: #F8F9F9;">llama_cpp
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/LlamaIndex/" title="LlamaIndex: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="LlamaIndex" style="background-color: #D5F5E3;">LlamaIndex
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Linux安装Ollama"><a href="#Linux安装Ollama" class="headerlink" title="Linux安装Ollama"></a>Linux安装Ollama</h1><h2 id="安装命令："><a href="#安装命令：" class="headerlink" title="安装命令："></a>安装命令：</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://ollama.com/install.sh <span class="token operator">|</span> <span class="token function">sh</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果下载速度很慢，可以开启学术加速</p>
+<h3 id="开启学术加速"><a href="#开启学术加速" class="headerlink" title="开启学术加速:"></a>开启学术加速:</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> /etc/network_turbo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="取消学术加速"><a href="#取消学术加速" class="headerlink" title="取消学术加速:"></a>取消学术加速:</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">unset</span> http_proxy <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">unset</span> https_proxy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="Ollama安装模型："><a href="#Ollama安装模型：" class="headerlink" title="Ollama安装模型："></a>Ollama安装模型：</h2><h3 id="下载模型"><a href="#下载模型" class="headerlink" title="下载模型"></a>下载模型</h3><p>以 llama3.2:1b 模型为例，运行下面命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama run llama3.2:1b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>等待命令结束。</p>
+<h3 id="使用模型"><a href="#使用模型" class="headerlink" title="使用模型"></a>使用模型</h3><p>ollama使用模型有两种方式，一种通过终端命令使用，一种通过python代码使用，两种方式都需要首先开启ollama服务</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama serve<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h4 id="1-通过终端使用"><a href="#1-通过终端使用" class="headerlink" title="1.通过终端使用"></a>1.通过终端使用</h4><p>终端运行命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama run llama3.2:1b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>终端会进入对话模式，这时输入你要问的问题即可使用模型。</p>
+<h4 id="2-通过python代码使用模型"><a href="#2-通过python代码使用模型" class="headerlink" title="2.通过python代码使用模型"></a>2.通过python代码使用模型</h4><p>安装 openai 包</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> opeani<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>python代码简单调用</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> openai <span class="token keyword">import</span> OpenAI
+
+<span class="token comment"># 通过openai接口调用模型，导入模型地址，和api_key</span>
+client <span class="token operator">=</span> OpenAI<span class="token punctuation">(</span>base_url<span class="token operator">=</span><span class="token string">"http://localhost:11434/v1/"</span><span class="token punctuation">,</span>api_key<span class="token operator">=</span><span class="token string">"ollama"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 提示词模板，并输入用户问题，指定使用模型名字</span>
+responce<span class="token operator">=</span>client<span class="token punctuation">.</span>chat<span class="token punctuation">.</span>completions<span class="token punctuation">.</span>create<span class="token punctuation">(</span>
+    messages<span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span><span class="token string">"user"</span><span class="token punctuation">,</span><span class="token string">"content"</span><span class="token punctuation">:</span><span class="token string">"你好!你是谁？你是由谁创造的？"</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>model<span class="token operator">=</span><span class="token string">"llama3.2:1B"</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 打印结果</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>responce<span class="token punctuation">.</span>choices<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>base_url：启动<code>ollama serve</code>后会给出地址和端口，一般为<a target="_blank" rel="noopener" href="http://localhost:11434/">http://localhost:11434</a></p>
+<p>api_key：为ollama，因为使用的ollama框架</p>
+<p>简单多轮对话框架调用：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#多轮对话</span>
+<span class="token keyword">from</span> openai <span class="token keyword">import</span> OpenAI
+
+<span class="token comment">#定义多轮对话方法</span>
+<span class="token keyword">def</span> <span class="token function">run_chat_session</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment">#初始化客户端</span>
+    client <span class="token operator">=</span> OpenAI<span class="token punctuation">(</span>base_url<span class="token operator">=</span><span class="token string">"http://localhost:11434/v1/"</span><span class="token punctuation">,</span>api_key<span class="token operator">=</span><span class="token string">"ollama"</span><span class="token punctuation">)</span>
+    <span class="token comment">#初始化对话历史</span>
+    chat_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token comment">#启动多轮对话</span>
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        <span class="token comment">#获取用户输入</span>
+        user_input <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"用户："</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> user_input<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token string">"exit"</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"退出对话"</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+        <span class="token comment">#更新对话历史（添加用户输入）</span>
+        chat_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span><span class="token string">"user"</span><span class="token punctuation">,</span><span class="token string">"content"</span><span class="token punctuation">:</span>user_input<span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token comment">#调用模型回答</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            chat_complition <span class="token operator">=</span> client<span class="token punctuation">.</span>chat<span class="token punctuation">.</span>completions<span class="token punctuation">.</span>create<span class="token punctuation">(</span>messages<span class="token operator">=</span>chat_history<span class="token punctuation">,</span>model<span class="token operator">=</span><span class="token string">"llama3.2:1b"</span><span class="token punctuation">)</span>
+            <span class="token comment">#获取最新回答</span>
+            moedl_responce <span class="token operator">=</span> chat_complition<span class="token punctuation">.</span>choices<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"AI："</span><span class="token punctuation">,</span>moedl_responce<span class="token punctuation">.</span>message<span class="token punctuation">.</span>content<span class="token punctuation">)</span>
+            <span class="token comment">#更新对话历史（添加AI模型的回复）</span>
+            chat_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span><span class="token string">"assistant"</span><span class="token punctuation">,</span><span class="token string">"content"</span><span class="token punctuation">:</span>moedl_responce<span class="token punctuation">.</span>message<span class="token punctuation">.</span>content<span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"发生错误："</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    run_chat_session<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">墨宇Logic</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://ismoyuai.github.io/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-ollama-diao-yong-ben-di-mo-xing/">https://ismoyuai.github.io/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-ollama-diao-yong-ben-di-mo-xing/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">墨宇Logic</a>
+                    !
+                </span>
+            </div>
+        
     </div>
-</div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/ollama/">
+                                    <span class="chip bg-color">ollama</span>
+                                </a>
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/LLaMa/">
+                                    <span class="chip bg-color">LLaMa</span>
+                                </a>
+                            
+                                <a href="/tags/LoRA/">
+                                    <span class="chip bg-color">LoRA</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
 
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="css, Markdown" data-aos="fade-up">
-                <div class="card">
-                    <a href="/hexo-github-netlify-clouldflare-da-jian-ge-ren-bo-ke/">
-                        <div class="card-image tag-image">
-                            
-                            <img src="/medias/featureimages/6.png" class="responsive-img" alt="hexo+github+Netlify+ClouldFlare搭建个人博客">
-                            
-                            <span class="card-title">hexo+github+Netlify+ClouldFlare搭建个人博客</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-category">
-                                博客搭建教程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+</div>
+
                 </div>
             </div>
             
         </div>
-    </article>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-ji-yu-llama-factory-de-llama3.2-1b-mo-xing-wei-diao-ruo-zhi-ba-shu-ju-ji-quan-liu-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="【AI大模型应用学习笔记】基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程">
+                        
+                        <span class="card-title">【AI大模型应用学习笔记】基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基于LLaMA-Factory模型微调框架，使用Unichat-llama3.2-Chinese-1B 和 弱智吧数据集 来进行模型微调训练、评估、量化、导出实现全过程
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                    AI大模型应用开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/vllm/">
+                        <span class="chip bg-color">vllm</span>
+                    </a>
+                    
+                    <a href="/tags/PyTorch/">
+                        <span class="chip bg-color">PyTorch</span>
+                    </a>
+                    
+                    <a href="/tags/LLaMA-Factory/">
+                        <span class="chip bg-color">LLaMA-Factory</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-llama3-wei-diao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="【AI大模型应用学习笔记】LLaMa3微调">
+                        
+                        <span class="card-title">【AI大模型应用学习笔记】LLaMa3微调</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                    AI大模型应用开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ollama/">
+                        <span class="chip bg-color">ollama</span>
+                    </a>
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/LLaMa/">
+                        <span class="chip bg-color">LLaMa</span>
+                    </a>
+                    
+                    <a href="/tags/LoRA/">
+                        <span class="chip bg-color">LoRA</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 墨宇Logic<br />'
+            + '文章作者: 墨宇Logic<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    
+
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 

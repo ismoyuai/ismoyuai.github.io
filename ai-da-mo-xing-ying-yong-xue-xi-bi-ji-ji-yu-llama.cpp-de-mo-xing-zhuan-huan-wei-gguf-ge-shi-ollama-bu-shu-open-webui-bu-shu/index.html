@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程, AI,Python,C,C++,Linux">
-    <meta name="description" content="基于LLaMA-Factory模型微调框架，使用Unichat-llama3.2-Chinese-1B 和 弱智吧数据集 来进行模型微调训练、评估、量化、导出实现全过程">
+    <meta name="keywords" content="【AI大模型应用学习笔记】基于llama.cpp的模型转换为GGUF格式+ollama部署+open-webui部署, AI,Python,C,C++,Linux">
+    <meta name="description" content="使用llama.cpp框架转换hf模型格式为GGUF并通过ollama实现本地部署调用和使用open-webui界面调用案例教程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程 | 墨宇Logic</title>
+    <title>【AI大模型应用学习笔记】基于llama.cpp的模型转换为GGUF格式+ollama部署+open-webui部署 | 墨宇Logic</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -467,12 +467,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程</h1>
+                    <h1 class="description center-align post-title">【AI大模型应用学习笔记】基于llama.cpp的模型转换为GGUF格式+ollama部署+open-webui部署</h1>
                 </div>
             </div>
         </div>
@@ -496,20 +496,32 @@
                     
                     <div class="article-tag">
                         
+                            <a href="/tags/ollama/">
+                                <span class="chip bg-color">ollama</span>
+                            </a>
+                        
                             <a href="/tags/Python/">
                                 <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
                             <a href="/tags/PyTorch/">
                                 <span class="chip bg-color">PyTorch</span>
                             </a>
                         
-                            <a href="/tags/vllm/">
-                                <span class="chip bg-color">vllm</span>
+                            <a href="/tags/huggingface/">
+                                <span class="chip bg-color">huggingface</span>
                             </a>
                         
-                            <a href="/tags/LLaMA-Factory/">
-                                <span class="chip bg-color">LLaMA-Factory</span>
+                            <a href="/tags/open-webui/">
+                                <span class="chip bg-color">open-webui</span>
+                            </a>
+                        
+                            <a href="/tags/llama-cpp/">
+                                <span class="chip bg-color">llama_cpp</span>
                             </a>
                         
                     </div>
@@ -533,28 +545,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-04-25
+                    2025-04-28
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-05-02
+                    2025-05-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.6k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    14 分
+                    8 分
                 </div>
                 
 
@@ -577,327 +589,213 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、项目背景"><a href="#一、项目背景" class="headerlink" title="一、项目背景"></a>一、项目背景</h2><p>在大模型应用学习中，学习到LLaMA-Factory模型微调框架，于是打算自己来根据LLaMA-Factory框架完整的微调一遍大模型来当作练习，选择基地模型和数据集分别是 Unichat-llama3.2-Chinese-1B 和 弱智吧数据集，选择的原因一个是个人练习用，所以选择一个模型参数量较小的，另一个就是原版模型对中文的支持比较弱，使用选择了一个中文版本，数据集则选择非常有特色的，训练后能够很好的出效果的数据集。</p>
-<p>整个流程包括：模型下载、数据集整理、LoRA模式训练、模型评估、模型量化</p>
-<h2 id="二、环境准备"><a href="#二、环境准备" class="headerlink" title="二、环境准备"></a>二、环境准备</h2><p>选择的是AutoDL算力云平台 ，GPU和软件环境选择如下</p>
-<p><strong>GPU</strong>： RTX 3090(24GB)  + 软件环境：PyTorch 2.3.0+Python 3.12(ubuntu22.04)+CUDA 12.1</p>
-<p>本地使用软件vs code进行远程服务器连接</p>
-<h2 id="三、前期准备"><a href="#三、前期准备" class="headerlink" title="三、前期准备"></a>三、前期准备</h2><p>首先准备下载模型和数据集，这里下载有两种方式，一种是到我们租的服务器直接下载，一种是我们本地下载，这里我们选本地下载，因为下载的数据集还需要进行数据处理，本地处理比较方便，数据准备完成后上传到服务器即可。</p>
-<h3 id="3-1-模型下载"><a href="#3-1-模型下载" class="headerlink" title="3.1 模型下载"></a>3.1 模型下载</h3><p>通过魔塔社区SDK来下载</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装ModelScope</span>
-pip <span class="token function">install</span> modelscope<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+                <h2 id="一、将-huggingface-转换为-GGUF-模型"><a href="#一、将-huggingface-转换为-GGUF-模型" class="headerlink" title="一、将 huggingface 转换为 GGUF 模型"></a>一、将 huggingface 转换为 GGUF 模型</h2><h3 id="1-1-创建虚拟环境"><a href="#1-1-创建虚拟环境" class="headerlink" title="1.1 创建虚拟环境"></a>1.1 创建虚拟环境</h3><p>我们新建一个名叫llama.cpp的python虚拟环境</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 创建虚拟环境</span>
+conda create <span class="token parameter variable">-n</span> llama.cpp <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.10</span>
 
+<span class="token comment"># 切换环境</span>
+conda activate llama.cpp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="1-2-下载-llama-cpp仓库"><a href="#1-2-下载-llama-cpp仓库" class="headerlink" title="1.2 下载 llama. cpp仓库"></a>1.2 下载 llama. cpp仓库</h3><p>在llama.cpp虚拟环境下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 克隆仓库到本地</span>
+<span class="token function">git</span> clone https://github.com/ggerganov/llama.cpp.git
 
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 下载模型Unichat-llama3.2-Chinese-1B模型</span>
+<span class="token comment"># 安装依赖</span>
+pip <span class="token function">install</span> <span class="token parameter variable">-r</span> llama.cpp/requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token keyword">from</span> modelscope <span class="token keyword">import</span> snapshot_download
-model_dir <span class="token operator">=</span> snapshot_download<span class="token punctuation">(</span>
-    <span class="token string">'UnicomAI/Unichat-llama3.2-Chinese-1B'</span><span class="token punctuation">,</span>  <span class="token comment"># 模型名称</span>
-    cache_dir<span class="token operator">=</span><span class="token string">r"E:\xuexiziliao\AiProject\LLaMA-Factory-learn\llm"</span>  <span class="token comment"># 模型存放路径</span>
-    <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="1-3-转换模型"><a href="#1-3-转换模型" class="headerlink" title="1.3 转换模型"></a>1.3 转换模型</h3><p>执行下列命令，其中<code>/home/moyuai/moyuai/llm/Qwen/Qwen1-5-4B-Chat-train</code>为自己本地的模型路径，<code>Qwen1-5-4B-Chat-train-gguf.gguf</code>是我们转换后设置的模型名字。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 不进行模型量化，保留模型效果</span>
+python llama.cpp/convert_hf_to_gguf.py /home/moyuai/moyuai/llm/Qwen/Qwen1-5-4B-Chat-train <span class="token parameter variable">--outtype</span> auto <span class="token parameter variable">--verbose</span> <span class="token parameter variable">--outfile</span> Qwen1-5-4B-Ch
+at-train.gguf
 
-<p>下载完成后，模型目录文件如下图：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b4b7458cb8da5c8cb7203.png" alt="Unichat-llama3.2-Chinese-1B模型目录"></p>
-<h3 id="3-2-数据集下载"><a href="#3-2-数据集下载" class="headerlink" title="3.2 数据集下载"></a>3.2 数据集下载</h3><p>到魔塔社区中的数据集中搜索<strong>ruozhiba</strong>，然后我们找到<strong>w10442005/ruozhiba_qa</strong>数据集，下载代码如下：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 下载数据集前需要安装下面依赖</span>
-pip <span class="token function">install</span> numpy
-pip <span class="token function">install</span> datasets
-pip <span class="token function">install</span> addict<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 数据集下载</span>
-
-<span class="token keyword">from</span> modelscope<span class="token punctuation">.</span>msdatasets <span class="token keyword">import</span> MsDataset
-ds <span class="token operator">=</span>  MsDataset<span class="token punctuation">.</span>load<span class="token punctuation">(</span>
-    <span class="token string">'w10442005/ruozhiba_qa'</span><span class="token punctuation">,</span>  <span class="token comment"># 数据集名称</span>
-    subset_name<span class="token operator">=</span><span class="token string">'default'</span><span class="token punctuation">,</span>   <span class="token comment"># 数据集子集名称</span>
-    split<span class="token operator">=</span><span class="token string">'train'</span> <span class="token punctuation">,</span>  <span class="token comment"># 数据集划分  </span>
-    data_dir<span class="token operator">=</span><span class="token string">r"E:\xuexiziliao\AiProject\LLaMA-Factory-learn\data"</span><span class="token punctuation">,</span>  <span class="token comment"># 数据集存放路径</span>
-    <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>如果下载不成功则换为git clone 来下载，或者直接到魔塔社区<code>ruozhiba_qa</code>数据集文件中直接下载<code>ruozhiba_qaswift.json</code>文件。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://www.modelscope.cn/datasets/w10442005/ruozhiba_qa.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>下载完成后我们得到的数据集目录如下图：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b4c7e58cb8da5c8cb728d.png" alt="ruozhiba_qa数据集目录"></p>
-<p>我们要用到的就是其中<code>ruozhiba_qaswift.json</code>数据集文件，里面内容如下：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b4c7e58cb8da5c8cb728e.png" alt="ruozhiba_qaswift.json文件内容"></p>
-<h3 id="3-3-数据整理转换"><a href="#3-3-数据整理转换" class="headerlink" title="3.3 数据整理转换"></a>3.3 数据整理转换</h3><p>数据集文件我们拿到还不能够直接使用，因为<strong>LLaMA-Factory</strong>对数据集的格式要求是固定的，需要将里面的内容格式改为<code>identity.json</code>文件所示格式。如下图：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b989858cb8da5c8cd12fe.png" alt="identity.json文件格式"></p>
-<p>我们只需要将<code>ruozhiba_qaswift.json</code> 中的<code>query</code>和<code>response</code>替换为<code>identity.json</code>中的<code>instruction</code>和<code>output</code>,并添加一个<code>input</code>值即可。</p>
-<p>这里我们编写一个python程序来帮我们进行数据格式整理：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> json
-
-<span class="token comment"># 读取ruozhiba_qaswift.json文件</span>
-<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">r"\data\ruozhiba_qaswift.json"</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    data <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
-
-<span class="token comment"># 转换格式</span>
-converted_data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-<span class="token keyword">for</span> item <span class="token keyword">in</span> data<span class="token punctuation">:</span>
-    converted_item <span class="token operator">=</span> <span class="token punctuation">{</span>
-        <span class="token string">"instruction"</span><span class="token punctuation">:</span> item<span class="token punctuation">[</span><span class="token string">"query"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token string">"input"</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">,</span>        <span class="token comment"># 新增input字段并设为空字符串</span>
-        <span class="token string">"output"</span><span class="token punctuation">:</span> item<span class="token punctuation">[</span><span class="token string">"response"</span><span class="token punctuation">]</span>
-    <span class="token punctuation">}</span>
-    converted_data<span class="token punctuation">.</span>append<span class="token punctuation">(</span>converted_item<span class="token punctuation">)</span>
-
-<span class="token comment"># 保存为新的JSON文件</span>
-<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'converted_file.json'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    json<span class="token punctuation">.</span>dump<span class="token punctuation">(</span>converted_data<span class="token punctuation">,</span> f<span class="token punctuation">,</span> ensure_ascii<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> indent<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> sort_keys<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
-
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"转换完成！转换后的数据已保存为 converted_file.json"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>将转换后的json文件重命名为<code>ruozhiba_qaswift.json</code></p>
-<p>到此我们的模型和数据集就已经准备好了，接下来就是连接服务器准备开始训练</p>
-<h2 id="四、连接-AutoDL-服务器"><a href="#四、连接-AutoDL-服务器" class="headerlink" title="四、连接 AutoDL 服务器"></a>四、连接 AutoDL 服务器</h2><p>到<a target="_blank" rel="noopener" href="https://www.autodl.com/market/list">AutoDL</a>算力市场租一台机器,选择环境如下：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b6ef358cb8da5c8cc75fe.png" alt="服务器软件环境选择"></p>
-<p>选择好后开机，这时我们会得到远程服务器的ssh登入指令和密码，我们通过vs code来连接远程服务器</p>
-<p><img src="https://pic1.imgdb.cn/item/680b6ef358cb8da5c8cc75fd.png" alt="服务器ssh登入指令和密码"></p>
-<p><img src="https://pic1.imgdb.cn/item/680b6ef358cb8da5c8cc75ff.png" alt="通过vs code来连接服务器"></p>
-<p>服务器连接完成后，我们进入到服务器<code>root</code>目录下,<code>root</code>目录内容如下：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b702358cb8da5c8cc77f5.png" alt="服务器root目录内容"></p>
-<h2 id="五、安装LLaMA-Factory"><a href="#五、安装LLaMA-Factory" class="headerlink" title="五、安装LLaMA-Factory"></a>五、安装LLaMA-Factory</h2><p>下面我们安装<code>LLaMA-Factory</code>,我们安装在root目录下的<code>autodl-tmp</code>，这是服务器数据盘</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 进入autodl-tmp目录</span>
-<span class="token builtin class-name">cd</span> autodl-tmp/
-
-<span class="token comment"># AutoDL 学术加速</span>
-<span class="token builtin class-name">source</span> /etc/network_turbo
-
-<span class="token comment"># 下载LLaMA-Factory仓库</span>
-<span class="token function">git</span> clone https://github.com/hiyouga/LLaMA-Factory.git
-
-<span class="token comment"># 安装auto-gptq量化包，要先于vllm安装，且auto-gptq量化包需要 PyTorch2.2.1+cuda121 版本</span>
-pip <span class="token function">install</span> auto-gptq
-
-<span class="token comment"># 进入LLaMA-Factory文件夹</span>
-<span class="token builtin class-name">cd</span> LLaMA-Factory
-
-<span class="token comment"># 安装vllm</span>
-pip <span class="token function">install</span> <span class="token parameter variable">-e</span> .<span class="token punctuation">[</span><span class="token string">"vllm"</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>下载完成后<code>LLaMA-Factory</code>目录内容如下：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b7b0658cb8da5c8ccbcc9.png" alt="LLaMA-Factory目录内容"></p>
-<p>全部安装完成后，我们将准备好的模型和数据集上传到服务器，将<code>ruozhiba_qaswift.json</code>文件放到<code>LLaMA-Factory</code>目录的<code>data</code>目录下，如图位置：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b7b0658cb8da5c8ccbcca.png" alt="ruozhiba_qaswift.json文件位置"></p>
-<p>然后打开<code>LLaMA-Factory</code>目录的<code>data</code>目录下的<code>dataset_info.json</code>文件，在这里我们配置我们的数据集信息，在文件开始部分添加如下内容：</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"ruozhiba_qaswift"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-  <span class="token property">"file_name"</span><span class="token operator">:</span> <span class="token string">"ruozhiba_qaswift.json"</span><span class="token punctuation">,</span>
-  <span class="token property">"columns"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"prompt"</span><span class="token operator">:</span> <span class="token string">"instruction"</span><span class="token punctuation">,</span>
-    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token string">"input"</span><span class="token punctuation">,</span>
-    <span class="token property">"response"</span><span class="token operator">:</span> <span class="token string">"output"</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>修改后的<code>dataset_info.json</code>内容如下：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b7b0658cb8da5c8ccbccb.png" alt="修改后的dataset_info.json内容"></p>
-<h2 id="六、准备LoAR训练"><a href="#六、准备LoAR训练" class="headerlink" title="六、准备LoAR训练"></a>六、准备LoAR训练</h2><p>全部条件准备完成后我们启动Web UI 准备开始模型训练。</p>
-<p>进入<code>LLaMA-Factory</code>目录，我们执行命令启动Web UI：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> LLaMA-Factory
-
-<span class="token comment"># 运行LLaMA-Factory的webui</span>
-llamafactory-cli webui
-
-<span class="token comment"># 也可以使用以下命令，这样可以在后台运行webui，而不用担心终端关闭后webui会停止运行,这条命令会将输出重定向到webui.log文件中</span>
-<span class="token function">nohup</span> llamafactory-cli webui <span class="token operator">&gt;</span> webui.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
-
-<span class="token comment"># 如果要停止运行，你需要使用以下命令查找到 nohup 运行脚本到 PID，然后使用 kill 命令来删除：</span>
-<span class="token function">ps</span> <span class="token parameter variable">-aux</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"runoob.sh"</span> 
-
-<span class="token function">kill</span> <span class="token parameter variable">-9</span>  进程号PID<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>执行完后会自动跳转到浏览器打开webui界面，我们接下来配置训练参数</p>
-<h3 id="6-1-模型参数配置"><a href="#6-1-模型参数配置" class="headerlink" title="6.1 模型参数配置"></a>6.1 模型参数配置</h3><p>将界面修改为中文，这次我们需要设置参数为训练的模型名字，模型路径，其他保持默认</p>
-<p>其他参数：</p>
+<span class="token comment"># 需要量化（加速模型但有损失效果），执行下面脚本</span>
+python llama.cpp/convert_hf_to_gguf.py /home/moyuai/moyuai/llm/Qwen/Qwen1-5-4B-Chat-train <span class="token parameter variable">--outtype</span> q8_0 <span class="token parameter variable">--verbose</span> <span class="token parameter variable">--outfile</span> /home/moyuai/moyuai/llm/GGUF/Qwen1-5-4B-Chat-train-q8.gguf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>脚本参数说明：<br>这里<code>--outtype</code>是输出类型，代表含义：</p>
 <ul>
-<li>微调方法选择 lora</li>
-<li>检查点路径：训练模型权重保存路径，一般默认</li>
-<li>最下面一排参数先默认</li>
+<li>q2_k：特定张量（Tensor）采用较高的精度设置，而其他的则保持基础级别。 </li>
+<li>q3_k_l、q3_k_m、q3_k_s：这些变体在不同张量上使用不同级别的精度，从而达到性能和效率的平衡。 </li>
+<li>q4_0：这是最初的量化方案，使用 4 位精度。 </li>
+<li>q4_1 和 q4_k_m、q4_k_s：这些提供了不同程度的准确性和推理速度，适合需要平衡资源使用的场景。 </li>
+<li>q5_0、q5_1、q5_k_m、q5_k_s：这些版本在保证更高准确度的同时，会使用更多的资源并且推理速度较 慢。</li>
+<li>q6_k 和 q8_0：这些提供了最高的精度，但是因为高资源消耗和慢速度，可能不适合所有用户。</li>
+<li>fp16 和 f32: 不量化，保留原始精度。</li>
 </ul>
-<p>模型路径为我们服务器上模型存放的路径，如下图：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b816258cb8da5c8ccd5ff.png" alt="模型配置部分"></p>
-<h3 id="6-2-Train参数配置"><a href="#6-2-Train参数配置" class="headerlink" title="6.2 Train参数配置"></a>6.2 Train参数配置</h3><p>Train参数本次设置如下：</p>
-<p><img src="https://pic1.imgdb.cn/item/680b844158cb8da5c8cce0c8.png" alt="Train参数配置部分"></p>
-<p>本次训练所配置参数就上面这些，其他这次保持默认。</p>
-<p>我们点击开始，等待训练，我们这次训练轮次设置的为1000。</p>
-<div class="alert alert-success">
-<b>模型继续训练：有两种方法，一种是将模型和最新保存的权重文件合并后设置训练参数然后继续训练，另一种是不合并直接设置训练参数然后继续训练。</b>
-</div>
+<p>这里<code>--outfile</code>是输出文件名字和路径。</p>
+<h2 id="二、ollama本地部署调用模型"><a href="#二、ollama本地部署调用模型" class="headerlink" title="二、ollama本地部署调用模型"></a>二、ollama本地部署调用模型</h2><h3 id="2-1-安装ollama"><a href="#2-1-安装ollama" class="headerlink" title="2.1 安装ollama"></a>2.1 安装ollama</h3><p>执行命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://ollama.com/install.sh <span class="token operator">|</span> <span class="token function">sh</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="6-3-模型效果测试"><a href="#6-3-模型效果测试" class="headerlink" title="6.3 模型效果测试"></a>6.3 模型效果测试</h3><p>训练完成后，遇到了一个问题，就是训练过程中loss值一直降到非常低，这里我们不管，只要loss值一直在降低没有过拟合就行。</p>
-<p>当然模型训练的loss并不是评估模型效果的唯一指标，我们需要根据具体情况来判断一个模型的训练好坏。</p>
-<p>训练过程中的两个阶段的loss值趋势如下：</p>
-<center class="half">
-    <img src="https://pic1.imgdb.cn/item/680c41f358cb8da5c8ce1557.webp" width="500">
-    <img src="https://pic1.imgdb.cn/item/680c41f358cb8da5c8ce1556.webp" width="500">
-</center>
-可以看到在1000轮之后，loss值就一直降低到0.5以下，到后面几乎接近0，这里我们取1000轮左右保存的训练权重和最后轮的训练训练权重来做对比，看谁的效果更好。
+<h3 id="2-2-启动ollama服务"><a href="#2-2-启动ollama服务" class="headerlink" title="2.2 启动ollama服务"></a>2.2 启动ollama服务</h3><p>执行命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama serve<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<h3 id="2-3-创建ModelFile"><a href="#2-3-创建ModelFile" class="headerlink" title="2.3 创建ModelFile"></a>2.3 创建ModelFile</h3><p>复制模型路径，创建名为“ModelFile”的meta文件，内容如下：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#GGUF文件路径 </span>
+FROM /home/moyuai/moyuai/llm/ollama-models/Qwen1-5-4B-Chat-train.gguf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
+<h3 id="2-4-创建自定义模型"><a href="#2-4-创建自定义模型" class="headerlink" title="2.4 创建自定义模型"></a>2.4 创建自定义模型</h3><p> 使用ollama create命令创建自定义模型，<code>Qwen1-5-4B-Chat-train</code>是我们命名的ollama模型名字，<code>--file</code>后面跟的是我们创建的ModeIFile文件路径。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama create Qwen1-5-4B-Chat-train <span class="token parameter variable">--file</span> /home/moyuai/moyuai/ModeIFile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>后面由于安装<code>auto-gptq</code>包时环境出了问题，后面上网查找原因时，是因为安装<code>auto-gptq</code>包必须要有指定PyTorch和CUDA版本，要求的版本为</p>
+<h3 id="2-5-运行模型"><a href="#2-5-运行模型" class="headerlink" title="2.5 运行模型"></a>2.5 运行模型</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama run Qwen1-5-4B-Chat-train<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>其实这里运行后，我有测试过模型效果，发现非常差，所以就没放效果图。</p>
+<h2 id="三、使用-Open-WebUI-部署模型"><a href="#三、使用-Open-WebUI-部署模型" class="headerlink" title="三、使用 Open WebUI 部署模型"></a>三、使用 Open WebUI 部署模型</h2><p>Open WebUI 是一个可扩展的、自托管的 AI 界面，可以适应您的工作流程，同时完全离线操作。<br>Open WebUI仓库： <a target="_blank" rel="noopener" href="https://github.com/open-webui/open-webui">https://github.com/open-webui/open-webui</a><br>Open WebUI文档： <a target="_blank" rel="noopener" href="https://docs.openwebui.com/">https://docs.openwebui.com/</a></p>
+<h3 id="3-1-创建虚拟环境"><a href="#3-1-创建虚拟环境" class="headerlink" title="3.1 创建虚拟环境"></a>3.1 创建虚拟环境</h3><p>我们在选择虚拟环境时，必须选用python3.11 版本，因为openwebui有要求。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">-n</span> open-webui <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.11</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-2-安装所需依赖"><a href="#3-2-安装所需依赖" class="headerlink" title="3.2 安装所需依赖"></a>3.2 安装所需依赖</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda activate open-webui 
+pip <span class="token function">install</span> <span class="token parameter variable">-U</span> open-webui torch transformers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="3-3-运行ollama"><a href="#3-3-运行ollama" class="headerlink" title="3.3 运行ollama"></a>3.3 运行ollama</h3><p>ollama运行后会在本地端口暴露一个 openai API 服务，我们后面使用 open-webui 来连接就可以了。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama serve<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-4-启动open-webui"><a href="#3-4-启动open-webui" class="headerlink" title="3.4 启动open-webui"></a>3.4 启动open-webui</h3><p>运行 open-webui 由于 ollama 的运行导致原终端阻塞，因此要另外开一个新终端 。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda activate open-webui 
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">HF_ENDPOINT</span><span class="token operator">=</span>https://hf-mirror.com  <span class="token comment"># Hugging Face 镜像网站</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ENABLE_OLLAMA_API</span><span class="token operator">=</span>True             <span class="token comment"># 访问ollama端口</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENAI_API_BASE_URL</span><span class="token operator">=</span>http://127.0.0.1:11434/v1 <span class="token comment"># 导出ollama服务端口</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">DEFAULT_MODELS</span><span class="token operator">=</span><span class="token string">"/home/moyuai/moyuai/llm/Qwen/Qwen1___5-4B-Chat"</span>  <span class="token comment"># 加载默认模型</span>
+open-webui serve  <span class="token comment"># 启动服务</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>启动open-webui后，就可以在浏览器弹出的界面中使用我们训练的大模型了。</p>
+<h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h3 id="1-执行-python-llama-cpp-convert-hf-to-gguf-py-脚本时报错"><a href="#1-执行-python-llama-cpp-convert-hf-to-gguf-py-脚本时报错" class="headerlink" title="1.执行 python llama.cpp/convert_hf_to_gguf.py 脚本时报错"></a>1.执行 <code>python llama.cpp/convert_hf_to_gguf.py</code> 脚本时报错</h3><p>报错信息如下：</p>
+<pre class="line-numbers language-none"><code class="language-none"># 完整命令
+python llama.cpp/convert_hf_to_gguf.py /home/moyuai/moyuai/llm/Qwen/Qwen1-5-4B-Chat-train  --outtype f16 --verbose --outfile Qwen1-5-4B-C
+hat-train-gguf.gguf
+
+# 报错信息
+usage: convert_hf_to_gguf.py [-h] [--vocab-only] [--outfile OUTFILE]
+                             [--outtype {f32,f16,bf16,q8_0,tq1_0,tq2_0,auto}]
+                             [--bigendian] [--use-temp-file] [--no-lazy]
+                             [--model-name MODEL_NAME] [--verbose]
+                             [--split-max-tensors SPLIT_MAX_TENSORS]
+                             [--split-max-size SPLIT_MAX_SIZE] [--dry-run]
+                             [--no-tensor-first-split] [--metadata METADATA]
+                             [--print-supported-models] [--remote] [--mmproj]
+                             [model]
+convert_hf_to_gguf.py: error: unrecognized arguments:  --outtype f16<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解决方法：是由于命令中–outtype命令前多了一个空格导致的</p>
+<hr>
+<h3 id="2-ollama-serve启动报错"><a href="#2-ollama-serve启动报错" class="headerlink" title="2. ollama serve启动报错"></a>2. ollama serve启动报错</h3><pre class="line-numbers language-none"><code class="language-none"># 执行命令
+ollama serve
+
+# 报错信息
+Error: listen tcp 127.0.0.1:11434: bind: address already in use<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个错误表明 Ollama 尝试在&nbsp;<code>127.0.0.1:11434</code>&nbsp;上启动服务时，发现该端口已经被占用。网上查找有两个解决方法，我是用的原因二解决的：</p>
+<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><h5 id="1-检查端口占用"><a href="#1-检查端口占用" class="headerlink" title="1.&nbsp;检查端口占用"></a>1.&nbsp;<strong>检查端口占用</strong></h5><p>首先，确认&nbsp;<code>11434</code>&nbsp;端口是否被其他进程占用。</p>
+<h6 id="Windows下检查端口占用"><a href="#Windows下检查端口占用" class="headerlink" title="Windows下检查端口占用"></a><strong>Windows下检查端口占用</strong></h6><p>打开命令提示符（CMD）或 PowerShell，运行以下命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">netstat</span> <span class="token parameter variable">-ano</span> <span class="token operator">|</span> findstr :11434<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <ul>
-<li>PyTorch  2.1.2</li>
-<li>CUDA  11.8<br>的后续换了一个服务器，软件环境选择如下：</li>
+<li>如果端口被占用，会显示类似以下内容：  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">TCP    <span class="token number">127.0</span>.0.1:11434    <span class="token number">0.0</span>.0.0:0    LISTENING   <span class="token number">12345</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+  其中&nbsp;<code>12345</code>&nbsp;是占用该端口的进程 ID（PID）。</li>
 </ul>
-<p><img src="https://pic1.imgdb.cn/item/680c41f458cb8da5c8ce1559.png" alt="更换服务器后的环境选择"></p>
-<p>这里我们重新安装一下<code>LLaMA-Factory</code>，这里和之前安装步骤有点不同，安装<code>LLaMA-Factory</code>所需依赖前，需要先安装量化包<code>auto-gptq</code> 。这是后续模型量化步骤的所必须的，而且安装<code>vllm</code>包之前要先安装<code>auto-gptq</code>包，这也是我们为什么要换环境的原因。</p>
-<p>执行以下命令：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 进入autodl-tmp目录</span>
-<span class="token builtin class-name">cd</span> autodl-tmp/
-
-<span class="token comment"># AutoDL 学术加速</span>
-<span class="token builtin class-name">source</span> /etc/network_turbo
-
-<span class="token comment"># 下载LLaMA-Factory仓库</span>
-<span class="token function">git</span> clone https://github.com/hiyouga/LLaMA-Factory.git
-
-<span class="token comment"># 安装auto-gptq量化包</span>
-pip <span class="token function">install</span> auto-gptq
-
-<span class="token comment"># 安装vllm</span>
-pip <span class="token function">install</span> <span class="token parameter variable">-e</span> .<span class="token punctuation">[</span><span class="token string">"vllm"</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>环境安装成功后，我们准备测试模型训练效果</p>
-<p>将我们另一个服务器训练好的权重复制到新的服务器上来，并重新下载一遍模型，权重准备好后，准备开启web ui</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> LLaMA-Factory
-
-<span class="token comment"># 运行LLaMA-Factory的webui</span>
-llamafactory-cli webui<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这次我们要用到<code>LLaMA-FactoryChat</code>的Chat推理功能，参数说明如下图：</p>
-<p><img src="https://pic1.imgdb.cn/item/680c4c8f58cb8da5c8ce186d.png" alt="Chat推理参数设置"></p>
-<p>下面我们用原始模型，以及加载不同训练轮次的权重模型后，对同一问题模型给的回答来进行一个对比。</p>
-<p>加载模型准备开始测试</p>
-<p>因为训练时顺便加了关于自我认知的数据集，所以来进行自我认知测试，模型回答如下：</p>
-<figure class="half">
-    <img src="https://pic1.imgdb.cn/item/680c528c58cb8da5c8ce1d10.png">
-    <img src="https://pic1.imgdb.cn/item/680c528c58cb8da5c8ce1d11.png">
-    <img src="https://pic1.imgdb.cn/item/680c529858cb8da5c8ce1d18.png">
-</figure>
-
-<p>对模型用弱智吧的问题进行提问，模型回答如下：</p>
-<figure class="half">
-    <img src="https://pic1.imgdb.cn/item/680c528c58cb8da5c8ce1d12.png">
-    <img src="https://pic1.imgdb.cn/item/680c528c58cb8da5c8ce1d0f.png">
-    <img src="https://pic1.imgdb.cn/item/680c529858cb8da5c8ce1d19.png">
-    <img src="https://pic1.imgdb.cn/item/680c529858cb8da5c8ce1d1a.png">
-</figure>
-这里模型训练效果都感觉一般，我推测是因为选择的基座模型的原因，后续可以换一个基座模型在测试一遍，这次先将流程走完。
-
-<h3 id="6-4-模型合并导出"><a href="#6-4-模型合并导出" class="headerlink" title="6.4 模型合并导出"></a>6.4 模型合并导出</h3><p>我们先将模型合并，然后在进行模型量化导出，模型导出设置如下，我们用1000轮的权重来进行模型合并</p>
-<p><img src="https://pic1.imgdb.cn/item/680c908358cb8da5c8cec05f.png" alt="模型导出设置"></p>
-<h3 id="6-5-模型量化导出"><a href="#6-5-模型量化导出" class="headerlink" title="6.5 模型量化导出"></a>6.5 模型量化导出</h3><p>将我们上面导出的模型文件加载进来，量化导出设置如下：</p>
-<p><img src="https://pic1.imgdb.cn/item/680c908358cb8da5c8cec05e.png" alt="量化模型导出设置"></p>
-<p>这里导出我们看控制台有没有报错信息，可能会要提示我们安装一些环境，提示缺什么我们就安装什么。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> optimum<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>安装完成后记得重启webui，然后我们重新配置一下等待模型量化导出完成。</p>
-<p>这里我一共导出了q2,q4,q8精度的量化模型，然后来分别对它们的效果进行对比，q4和q8精度下，模型效果和没量化前区别不大，到测试q2时，模型已经完全不行了，全都回答乱码。</p>
-<figure class="half">
-    <img src="https://pic1.imgdb.cn/item/680c9bed58cb8da5c8cedd4a.png">
-    <img src="https://pic1.imgdb.cn/item/680c9bed58cb8da5c8cedd4b.png">
-    <img src="https://pic1.imgdb.cn/item/680c9bed58cb8da5c8cedd4c.png">
-</figure>
-
-<p>所以目前量化一般量化到4位和8位。</p>
-<h3 id="6-5-模型评估"><a href="#6-5-模型评估" class="headerlink" title="6.5 模型评估"></a>6.5 模型评估</h3><p>我们首先准备好测试数据集，这次我们先从<code>ruozhiba_qaswift.json</code>文件中取一部分数据从来作为我们的测试数据集,在<code>LLaMA-Factory/data</code>目录下面新建<code>ruozhiba_qaswift_test.json</code>文件，复制一部分<code>ruozhiba_qaswift.json</code>中的数据到<code>ruozhiba_qaswift_test.json</code>文件中，然后在<code>dataset_info.json</code>文件中配置<code>ruozhiba_qaswift_test.json</code>文件，准备好后我们开始模型评估。</p>
-<p>我们导入基座模型，设置好我们要评估的权重，然后进入<code>Evaluate &amp; Predict</code>界面，参数设置如下图：</p>
-<p><img src="https://pic1.imgdb.cn/item/68102dc658cb8da5c8d2b9f1.png" alt="模型评估设置"></p>
-<p>我们点击开始评估，这时会要求我们安装几个评估要用的包，我们依次根据提示安装即可</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> jieba
-pip <span class="token function">install</span> nltk
-pip <span class="token function">install</span> rouge_chinese<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>包安装完成后，模型评估开始，评估结果如下：</p>
-<p>训练1000轮权重的模型评估得分：</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
-    <span class="token property">"predict_bleu-4"</span><span class="token operator">:</span> <span class="token number">25.71370314171123</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_model_preparation_time"</span><span class="token operator">:</span> <span class="token number">0.0023</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_rouge-1"</span><span class="token operator">:</span> <span class="token number">48.205860895721926</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_rouge-2"</span><span class="token operator">:</span> <span class="token number">27.524134157754013</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_rouge-l"</span><span class="token operator">:</span> <span class="token number">41.42147493315508</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_runtime"</span><span class="token operator">:</span> <span class="token number">347.7339</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_samples_per_second"</span><span class="token operator">:</span> <span class="token number">4.302</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_steps_per_second"</span><span class="token operator">:</span> <span class="token number">0.359</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>训练3100轮的模型评估得分：</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
-    <span class="token property">"predict_bleu-4"</span><span class="token operator">:</span> <span class="token number">92.7214736631016</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_model_preparation_time"</span><span class="token operator">:</span> <span class="token number">0.0024</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_rouge-1"</span><span class="token operator">:</span> <span class="token number">95.9076695855615</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_rouge-2"</span><span class="token operator">:</span> <span class="token number">94.5167354946524</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_rouge-l"</span><span class="token operator">:</span> <span class="token number">95.47345046791445</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_runtime"</span><span class="token operator">:</span> <span class="token number">318.3357</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_samples_per_second"</span><span class="token operator">:</span> <span class="token number">4.699</span><span class="token punctuation">,</span>
-    <span class="token property">"predict_steps_per_second"</span><span class="token operator">:</span> <span class="token number">0.393</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这是一段 JSON 格式数据，用于表示模型预测性能的相关指标。以下是各字段的解释：</p>
+<h6 id="Linux-macOS-下检查端口占用"><a href="#Linux-macOS-下检查端口占用" class="headerlink" title="Linux/macOS 下检查端口占用"></a><strong>Linux/macOS 下检查端口占用</strong></h6><p>运行以下命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">lsof</span> <span class="token parameter variable">-i</span> :11434<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
-<li>predict_bleu4: BLEU-4 得分。</li>
-<li>predict_model_preparation_time: 模型准备时间</li>
-<li>predict_rouge1: ROUGE-1 得分</li>
-<li>predict_rouge2: ROUGE-2 得分</li>
-<li>predict_rougel: ROUGE-L 得分</li>
-<li>predict_runtime: 总运行时间</li>
-<li>predict_samples_per_second: 每秒处理样本数</li>
-<li>predict_steps_per_second: 每秒处理步骤数</li>
+<li>如果端口被占用，会显示类似以下内容：  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">COMMAND PID  <span class="token environment constant">USER</span>    FD   TYPE  DEVICE   SIZE/OFF NODE NAME
+ollama  <span class="token number">172</span>  ollama  3u   IPv4  <span class="token number">4919680</span>  0t0      TCP  localhost:11434 <span class="token punctuation">(</span>LISTEN<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ul>
-<p>这些指标用于评估模型性能，帮助优化。（详细资料可参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45573296/article/details/141333719">BLEU、ROUGE详解-语言模型的常用评价指标-举例附代码实现</a></p>
-<p>可以看出这次训练1000轮的效果其实并不好，评分都较低，和我们主观测试的结果差不多，而训练3100轮的效果就不错，得分较高。</p>
-<h3 id="6-6-关于QLoRA"><a href="#6-6-关于QLoRA" class="headerlink" title="6.6 关于QLoRA"></a>6.6 关于QLoRA</h3><p>QLoRA是一种优于LoRA训练的一个手段，QLoRA可以帮助我们在一定程度上降低训练时显存需要，而不像量化导出那样损失较大参数，并且可以加快训练速度，所以训练可以使用QLoRA来进行，</p>
-<p>开启QLoRA训练的一些设置：<br><img src="https://pic1.imgdb.cn/item/681033bd58cb8da5c8d2d9b4.png" alt="QLoRA设置"></p>
-<p><img src="https://pic1.imgdb.cn/item/681033bd58cb8da5c8d2d9b3.png" alt="QLoRA设置"></p>
-<h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h3 id="在AutoDL服务器中安装pip-install-auto-gptq-包出现报错"><a href="#在AutoDL服务器中安装pip-install-auto-gptq-包出现报错" class="headerlink" title="在AutoDL服务器中安装pip install auto-gptq 包出现报错"></a>在AutoDL服务器中安装pip install auto-gptq 包出现报错</h3><pre class="line-numbers language-root@autodl-container-3fac46b1d9-74c33bae:~/autodl-tmp/LLaMA-Factory#" data-language="root@autodl-container-3fac46b1d9-74c33bae:~/autodl-tmp/LLaMA-Factory#"><div class="caption"><span>pip install auto-gptq</span></div><code class="language-root@autodl-container-3fac46b1d9-74c33bae:~/autodl-tmp/LLaMA-Factory#">Looking in indexes: http://mirrors.aliyun.com/pypi/simple
-Collecting auto-gptq
-  Using cached http://mirrors.aliyun.com/pypi/packages/90/e5/b22697903982284fe284568fb2663a2196694a8eee637f5cf4ccfe435a38/auto_gptq-0.7.1.tar.gz (126 kB)
-  Preparing metadata (setup.py) ... done
-Discarding http://mirrors.aliyun.com/pypi/packages/90/e5/b22697903982284fe284568fb2663a2196694a8eee637f5cf4ccfe435a38/auto_gptq-0.7.1.tar.gz#sha256=5c61ad380e9b4c603757c254765e9083a90a820cd0aff1b5d2c6f7fd96c85e80 (from http://mirrors.aliyun.com/pypi/simple/auto-gptq/) (requires-python:&gt;=3.8.0): Requested auto-gptq from http://mirrors.aliyun.com/pypi/packages/90/e5/b22697903982284fe284568fb2663a2196694a8eee637f5cf4ccfe435a38/auto_gptq-0.7.1.tar.gz#sha256=5c61ad380e9b4c603757c254765e9083a90a820cd0aff1b5d2c6f7fd96c85e80 has inconsistent version: expected '0.7.1', but metadata has '0.7.1+cu124'
-  Using cached http://mirrors.aliyun.com/pypi/packages/34/71/c3e73cf17681f6ff4754ef8f4cb8b67af3def230fc8711eac1250bbd78d5/auto_gptq-0.7.0.tar.gz (124 kB)
-  Preparing metadata (setup.py) ... done
-Discarding http://mirrors.aliyun.com/pypi/packages/34/71/c3e73cf17681f6ff4754ef8f4cb8b67af3def230fc8711eac1250bbd78d5/auto_gptq-0.7.0.tar.gz#sha256=50a5396fae2db5a19446b3198ef0e86ee520846b881db47bdbf4eb9260eac723 (from http://mirrors.aliyun.com/pypi/simple/auto-gptq/) (requires-python:&gt;=3.8.0): Requested auto-gptq from http://mirrors.aliyun.com/pypi/packages/34/71/c3e73cf17681f6ff4754ef8f4cb8b67af3def230fc8711eac1250bbd78d5/auto_gptq-0.7.0.tar.gz#sha256=50a5396fae2db5a19446b3198ef0e86ee520846b881db47bdbf4eb9260eac723 has inconsistent version: expected '0.7.0', but metadata has '0.7.0+cu124'
-  Using cached http://mirrors.aliyun.com/pypi/packages/49/af/02b66e55dfd9aeb0ece923843043724ed7432ec0c649ea0f3b9fa1dd90c6/auto_gptq-0.6.0.tar.gz (120 kB)
-  Preparing metadata (setup.py) ... error
-  error: subprocess-exited-with-error
-  
-  × python setup.py egg_info did not run successfully.
-  │ exit code: 1
-  ╰─&gt; [20 lines of output]
-      python: can't open file '/tmp/pip-install-g1v4mpt6/auto-gptq_c460ab0157b140969c62922c52a5ab77/./autogptq_extension/qigen/generate.py': [Errno 2] No such file or directory
-      Traceback (most recent call last):
-        File "/tmp/pip-install-g1v4mpt6/auto-gptq_c460ab0157b140969c62922c52a5ab77/setup.py", line 109, in &lt;module&gt;
-          subprocess.check_output(["python", "./autogptq_extension/qigen/generate.py", "--module", "--search", "--p", str(p)])
-        File "/root/miniconda3/lib/python3.12/subprocess.py", line 466, in check_output
-          return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        File "/root/miniconda3/lib/python3.12/subprocess.py", line 571, in run
-          raise CalledProcessError(retcode, process.args,
-      subprocess.CalledProcessError: Command '['python', './autogptq_extension/qigen/generate.py', '--module', '--search', '--p', '112']' returned non-zero exit status 2.
-      
-      During handling of the above exception, another exception occurred:
-      
-      Traceback (most recent call last):
-        File "&lt;string&gt;", line 2, in &lt;module&gt;
-        File "&lt;pip-setuptools-caller&gt;", line 34, in &lt;module&gt;
-        File "/tmp/pip-install-g1v4mpt6/auto-gptq_c460ab0157b140969c62922c52a5ab77/setup.py", line 111, in &lt;module&gt;
-          raise Exception(f"Generating QiGen kernels failed with the error shown above.")
-      Exception: Generating QiGen kernels failed with the error shown above.
-      Generating qigen kernels...
-      [end of output]
-  
-  note: This error originates from a subprocess, and is likely not a problem with pip.
-error: metadata-generation-failed
+<hr>
+<h5 id="2-终止占用端口的进程"><a href="#2-终止占用端口的进程" class="headerlink" title="2.&nbsp;终止占用端口的进程"></a>2.&nbsp;<strong>终止占用端口的进程</strong></h5><p>如果发现端口被占用，可以终止占用该端口的进程。</p>
+<h6 id="Windows-下终止进程"><a href="#Windows-下终止进程" class="headerlink" title="Windows 下终止进程"></a><strong>Windows 下终止进程</strong></h6><ol>
+<li>找到占用端口的进程 ID（PID）。</li>
+<li>运行以下命令终止进程： <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">taskkill /PID <span class="token number">12345</span> /F<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+ 其中&nbsp;<code>12345</code>&nbsp;是进程 ID。</li>
+</ol>
+<h6 id="Linux-macOS-下终止进程"><a href="#Linux-macOS-下终止进程" class="headerlink" title="Linux/macOS 下终止进程"></a><strong>Linux/macOS 下终止进程</strong></h6><ol>
+<li>找到占用端口的进程 ID（PID）。</li>
+<li>运行以下命令终止进程： <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token number">172</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+ 其中&nbsp;<code>12345</code>&nbsp;是进程 ID。</li>
+</ol>
+<hr>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>是因为没有配置环境变量</p>
+<h5 id="1-配置环境变量"><a href="#1-配置环境变量" class="headerlink" title="1.  配置环境变量"></a>1.  配置环境变量</h5><ol>
+<li>打开默认建立的ollama.service文件</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> /etc/systemd/system/ollama.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-× Encountered error while generating package metadata.
-╰─&gt; See above for output.
+<ol start="2">
+<li>看到默认的一些设置</li>
+</ol>
+<pre class="line-numbers language-cobol" data-language="cobol"><code class="language-cobol">[<span class="token keyword">Unit</span>]
+Description<span class="token operator">=</span>Ollama Service
+<span class="token keyword">After</span><span class="token operator">=</span>network-online<span class="token punctuation">.</span>target
+ 
+[Service]
+ExecStart<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>bin<span class="token operator">/</span>ollama serve
+User<span class="token operator">=</span>ollama
+<span class="token keyword">Group</span><span class="token operator">=</span>ollama
+Restart<span class="token operator">=</span>always
+RestartSec<span class="token operator">=</span><span class="token number">3</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"PATH=/data/1-software/1-setup/1-miniconda/bin:/data/1-software/1-setup/1-miniconda/condabin:/data/1-software/1-setup/1-miniconda/bin:/usr/bin:/usr/local/bin:/usr/local/cuda/bin:/usr/bin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"</span>
+ 
+ 
+[Install]
+WantedBy<span class="token operator">=</span><span class="token keyword">default</span><span class="token punctuation">.</span>target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-note: This is an issue with the package mentioned above, not pip.
-hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="3">
+<li>在&nbsp;[Service]下面增加环境配置参数</li>
+</ol>
+<pre class="line-numbers language-cobol" data-language="cobol"><code class="language-cobol">[<span class="token keyword">Unit</span>]
+Description<span class="token operator">=</span>Ollama Service
+<span class="token keyword">After</span><span class="token operator">=</span>network-online<span class="token punctuation">.</span>target
+ 
+[Service]
+ExecStart<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span><span class="token keyword">local</span><span class="token operator">/</span>bin<span class="token operator">/</span>ollama serve
+User<span class="token operator">=</span>ollama
+<span class="token keyword">Group</span><span class="token operator">=</span>ollama
+Restart<span class="token operator">=</span>always
+RestartSec<span class="token operator">=</span><span class="token number">3</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"PATH=/data/1-software/1-setup/1-miniconda/bin:/data/1-software/1-setup/1-miniconda/condabin:/data/1-software/1-setup/1-miniconda/bin:/usr/bin:/usr/local/bin:/usr/local/cuda/bin:/usr/bin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"</span>
+ 
+ 
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_MODELS=/home/moyuai/moyuai/llm/ollama-models"</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_HOST=0.0.0.0:11435"</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_KEEP_ALIVE=24h"</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_NUM_PARALLEL=100"</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_MAX_LOADED_MODELS=4"</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_SCHED_SPREAD=1"</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_FLASH_ATTENTION=1"</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_DEBUG=1"</span>
+<span class="token keyword">Environment</span><span class="token operator">=</span><span class="token string">"OLLAMA_ACCELERATE=1"</span>
+ 
+[Install]
+WantedBy<span class="token operator">=</span><span class="token keyword">default</span><span class="token punctuation">.</span>target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="4">
+<li>按esc，输入“:wq”，退出文件编辑</li>
+</ol>
+<h5 id="2-重新加载systemd配置并重启服务"><a href="#2-重新加载systemd配置并重启服务" class="headerlink" title="2. 重新加载systemd配置并重启服务"></a>2. 重新加载systemd配置并重启服务</h5><ol>
+<li>重新加载systemd</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl daemon-reload<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>启动服务</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl start ollama<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="3">
+<li>查看状态</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl status ollama<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="4">
+<li>若想停止服务</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl stop ollama<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="5">
+<li>设置开机自启动</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> ollama<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="6">
+<li>若想停止开机自启动</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl disable ollama<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>最后重新执行<code>ollama serve</code>命令就成功解决。</p>
+<hr>
 
                 
             </div>
@@ -924,7 +822,7 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://ismoyuai.github.io/ji-yu-llama-factory-de-llama3.2-1b-mo-xing-wei-diao-ruo-zhi-ba-shu-ju-ji-quan-liu-cheng/">https://ismoyuai.github.io/ji-yu-llama-factory-de-llama3.2-1b-mo-xing-wei-diao-ruo-zhi-ba-shu-ju-ji-quan-liu-cheng/</a>
+                    <a href="https://ismoyuai.github.io/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-ji-yu-llama.cpp-de-mo-xing-zhuan-huan-wei-gguf-ge-shi-ollama-bu-shu-open-webui-bu-shu/">https://ismoyuai.github.io/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-ji-yu-llama.cpp-de-mo-xing-zhuan-huan-wei-gguf-ge-shi-ollama-bu-shu-open-webui-bu-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -962,20 +860,32 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
                     
                         <div class="article-tag">
                             
+                                <a href="/tags/ollama/">
+                                    <span class="chip bg-color">ollama</span>
+                                </a>
+                            
                                 <a href="/tags/Python/">
                                     <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
                                 <a href="/tags/PyTorch/">
                                     <span class="chip bg-color">PyTorch</span>
                                 </a>
                             
-                                <a href="/tags/vllm/">
-                                    <span class="chip bg-color">vllm</span>
+                                <a href="/tags/huggingface/">
+                                    <span class="chip bg-color">huggingface</span>
                                 </a>
                             
-                                <a href="/tags/LLaMA-Factory/">
-                                    <span class="chip bg-color">LLaMA-Factory</span>
+                                <a href="/tags/open-webui/">
+                                    <span class="chip bg-color">open-webui</span>
+                                </a>
+                            
+                                <a href="/tags/llama-cpp/">
+                                    <span class="chip bg-color">llama_cpp</span>
                                 </a>
                             
                         </div>
@@ -1025,19 +935,19 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/ji-yu-llama.cpp-de-mo-xing-zhuan-huan-wei-gguf-ge-shi-ollama-bu-shu-open-webui-bu-shu/">
+                <a href="/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-opencompass-mo-xing-ping-gu-kuang-jia-de-shi-yong-jiao-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/25.png" class="responsive-img" alt="基于llama.cpp的模型转换为GGUF格式+ollama部署+open-webui部署">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="【AI大模型应用学习笔记】OpenCompass模型评估框架的使用教程">
                         
-                        <span class="card-title">基于llama.cpp的模型转换为GGUF格式+ollama部署+open-webui部署</span>
+                        <span class="card-title">【AI大模型应用学习笔记】OpenCompass模型评估框架的使用教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用llama.cpp框架转换hf模型格式为GGUF并通过ollama实现本地部署调用和使用open-webui界面调用案例教程
+                            关于Open Compass模型评估框架的基本使用教程
                         
                     </div>
                     <div class="publish-info">
@@ -1059,32 +969,24 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ollama/">
-                        <span class="chip bg-color">ollama</span>
-                    </a>
-                    
                     <a href="/tags/Python/">
                         <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
+                    </a>
+                    
+                    <a href="/tags/vllm/">
+                        <span class="chip bg-color">vllm</span>
                     </a>
                     
                     <a href="/tags/PyTorch/">
                         <span class="chip bg-color">PyTorch</span>
                     </a>
                     
-                    <a href="/tags/huggingface/">
-                        <span class="chip bg-color">huggingface</span>
-                    </a>
-                    
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
-                    <a href="/tags/open-webui/">
-                        <span class="chip bg-color">open-webui</span>
-                    </a>
-                    
-                    <a href="/tags/llama-cpp/">
-                        <span class="chip bg-color">llama_cpp</span>
+                    <a href="/tags/OpenCompass/">
+                        <span class="chip bg-color">OpenCompass</span>
                     </a>
                     
                 </div>
@@ -1098,24 +1000,24 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/ollama-diao-yong-ben-di-mo-xing/">
+                <a href="/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-ji-yu-llama-factory-de-llama3.2-1b-mo-xing-wei-diao-ruo-zhi-ba-shu-ju-ji-quan-liu-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Ollama调用本地模型">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="【AI大模型应用学习笔记】基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程">
                         
-                        <span class="card-title">Ollama调用本地模型</span>
+                        <span class="card-title">【AI大模型应用学习笔记】基于LLaMA-Factory的LlaMa3.2-1b模型微调弱智吧数据集全流程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            基于LLaMA-Factory模型微调框架，使用Unichat-llama3.2-Chinese-1B 和 弱智吧数据集 来进行模型微调训练、评估、量化、导出实现全过程
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-25
                             </span>
                         <span class="publish-author">
                             
@@ -1132,24 +1034,20 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ollama/">
-                        <span class="chip bg-color">ollama</span>
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
                     </a>
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/vllm/">
+                        <span class="chip bg-color">vllm</span>
                     </a>
                     
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
+                    <a href="/tags/PyTorch/">
+                        <span class="chip bg-color">PyTorch</span>
                     </a>
                     
-                    <a href="/tags/LLaMa/">
-                        <span class="chip bg-color">LLaMa</span>
-                    </a>
-                    
-                    <a href="/tags/LoRA/">
-                        <span class="chip bg-color">LoRA</span>
+                    <a href="/tags/LLaMA-Factory/">
+                        <span class="chip bg-color">LLaMA-Factory</span>
                     </a>
                     
                 </div>
@@ -1311,6 +1209,13 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1332,7 +1237,7 @@ hint: See above for details.<span aria-hidden="true" class="line-numbers-rows"><
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">14.3k</span>
+                        class="white-color">29.2k</span>
             
             
             
