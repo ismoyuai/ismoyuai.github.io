@@ -615,7 +615,7 @@
 <li><strong>结果排序：</strong>&nbsp;根据相似度得分对检索到的结果进行排序，选择最相关的片段作为后续生成的输入。</li>
 </ul>
 <ol start="3">
-<li>生成模块设计：</li>
+<li><strong>生成模块设计：</strong></li>
 </ol>
 <ul>
 <li><strong>上下文融合</strong>：将检索到的相关片段与原始问题合并，形成更丰富的上下文信息。</li>
@@ -1702,14 +1702,18 @@ response <span class="token operator">=</span> image_qa<span class="token punctu
 <li><strong>建议</strong>：<br>&nbsp; &nbsp;- GraphRAG 不是万能良药<br>&nbsp; &nbsp;- 领会其核心思想<br>&nbsp; &nbsp;- 遇到传统 RAG 无论如何优化都不好解决的问题时，酌情使用</li>
 </ol>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="RAG-的流程"><a href="#RAG-的流程" class="headerlink" title="RAG 的流程"></a>RAG 的流程</h3><ul>
-<li>离线步骤：<ol>
+<li>离线步骤：</li>
+</ul>
+<ol>
 <li>文档加载</li>
 <li>文档切分</li>
 <li>向量化</li>
 <li>灌入向量数据库</li>
 </ol>
-</li>
-<li>在线步骤<ol>
+<ul>
+<li>在线步骤</li>
+</ul>
+<ol>
 <li>获取用户问题</li>
 <li>用户问题向量化</li>
 <li>检索向量数据库</li>
@@ -1717,8 +1721,6 @@ response <span class="token operator">=</span> image_qa<span class="token punctu
 <li>用最终获得的 Prompt 调用 LLM</li>
 <li>用 LLM 生成回复</li>
 </ol>
-</li>
-</ul>
 <h3 id="如果使用了开源-RAG，但是不好用怎么办？"><a href="#如果使用了开源-RAG，但是不好用怎么办？" class="headerlink" title="如果使用了开源 RAG，但是不好用怎么办？"></a>如果使用了开源 RAG，但是不好用怎么办？</h3><ol>
 <li>检查预处理效果：文档加载是否正确，切割的是否合理</li>
 <li>测试检验效果：问题检索回来的文本片段是否包含答案</li>
@@ -2213,7 +2215,7 @@ BadRequestError: Error code: 400 - {'error': {'message': 'Unknown model: text-em
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">29.2k</span>
+                        class="white-color">29.3k</span>
             
             
             

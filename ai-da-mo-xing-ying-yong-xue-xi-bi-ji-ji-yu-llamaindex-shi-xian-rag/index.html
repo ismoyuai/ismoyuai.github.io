@@ -540,21 +540,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-05-07
+                    2025-05-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.3k
+                    4.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    16 分
+                    17 分
                 </div>
                 
 
@@ -577,10 +577,10 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Llama-Index（核心组件介绍）"><a href="#Llama-Index（核心组件介绍）" class="headerlink" title="Llama_Index（核心组件介绍）"></a>Llama_Index（核心组件介绍）</h2><h3 id="什么是LlamaIndex"><a href="#什么是LlamaIndex" class="headerlink" title="什么是LlamaIndex?"></a>什么是LlamaIndex?</h3><p><code>LlamaIndex</code> 是一个用于 <code>LLM</code> 应用程序的数据框架，用于注入，结构化，并访问私有或特定领域数据。<br><code>LlamaIndex</code> 由 Jerry Liu (Twitter: @jerryjliu0) 联合创办，并担任CEO。</p>
-<h3 id="LlamaIndex为何而生？"><a href="#LlamaIndex为何而生？" class="headerlink" title="LlamaIndex为何而生？"></a>LlamaIndex为何而生？</h3><p>在本质上， <code>LLM</code> （如 GPT ）为人类和推断出的数据提供了基于自然语言的交互接口。广泛可用的大模型通常在大量公开可用的数据上进行的预训练，包括来自维基百科、邮件列表、书籍和源代码等。<br>构建在LLM模型之上的应用程序通常需要使用私有或特定领域数据来增强这些模型。不幸的是，这些数据可能分布在不同的应用程序和数据存储中。它们可能存在于API之后、SQL数据库中，或者存在在PDF 文件以及幻灯片中。</p>
+                <h2 id="一、Llama-Index（核心组件介绍）"><a href="#一、Llama-Index（核心组件介绍）" class="headerlink" title="一、Llama_Index（核心组件介绍）"></a>一、Llama_Index（核心组件介绍）</h2><h3 id="1-1-什么是LlamaIndex"><a href="#1-1-什么是LlamaIndex" class="headerlink" title="1.1 什么是LlamaIndex?"></a>1.1 什么是LlamaIndex?</h3><p><code>LlamaIndex</code> 是一个用于 <code>LLM</code> 应用程序的数据框架，用于注入，结构化，并访问私有或特定领域数据。<br><code>LlamaIndex</code> 由 Jerry Liu (Twitter: @jerryjliu0) 联合创办，并担任CEO。</p>
+<h3 id="1-2-LlamaIndex为何而生？"><a href="#1-2-LlamaIndex为何而生？" class="headerlink" title="1.2 LlamaIndex为何而生？"></a>1.2 LlamaIndex为何而生？</h3><p>在本质上， <code>LLM</code> （如 GPT ）为人类和推断出的数据提供了基于自然语言的交互接口。广泛可用的大模型通常在大量公开可用的数据上进行的预训练，包括来自维基百科、邮件列表、书籍和源代码等。<br>构建在LLM模型之上的应用程序通常需要使用私有或特定领域数据来增强这些模型。不幸的是，这些数据可能分布在不同的应用程序和数据存储中。它们可能存在于API之后、SQL数据库中，或者存在在PDF 文件以及幻灯片中。</p>
 <p>LlamaIndex应运而生。</p>
-<h3 id="LlamaIndex如何破局？"><a href="#LlamaIndex如何破局？" class="headerlink" title="LlamaIndex如何破局？"></a>LlamaIndex如何破局？</h3><p>LlamaIndex 提供了5大核心工具：</p>
+<h3 id="1-3-LlamaIndex如何破局？"><a href="#1-3-LlamaIndex如何破局？" class="headerlink" title="1.3 LlamaIndex如何破局？"></a>1.3 LlamaIndex如何破局？</h3><p>LlamaIndex 提供了5大核心工具：</p>
 <ul>
 <li>Data connectors</li>
 <li>Data indexes</li>
@@ -588,20 +588,20 @@
 <li>Data agents</li>
 <li>Application integrations</li>
 </ul>
-<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><p><code>LlamaIndex</code> 帮助构建 <code>LLM</code> 驱动的，基于个人或私域数据的应用。RAG(Retrieval Augmented Generation) 是 <code>LlamaIndex</code> 应用的核心概念。</p>
-<h3 id="RAG"><a href="#RAG" class="headerlink" title="RAG"></a>RAG</h3><p>RAG，也称为检索增强生成，是利用个人或私域数据增强 <code>LLM</code> 的一种范式。通常，它包含两个阶段:</p>
+<h2 id="二、核心概念"><a href="#二、核心概念" class="headerlink" title="二、核心概念"></a>二、核心概念</h2><p><code>LlamaIndex</code> 帮助构建 <code>LLM</code> 驱动的，基于个人或私域数据的应用。RAG(Retrieval Augmented Generation) 是 <code>LlamaIndex</code> 应用的核心概念。</p>
+<h3 id="2-1-RAG"><a href="#2-1-RAG" class="headerlink" title="2.1 RAG"></a>2.1 RAG</h3><p>RAG，也称为检索增强生成，是利用个人或私域数据增强 <code>LLM</code> 的一种范式。通常，它包含两个阶段:</p>
 <ol>
 <li>索引<br> 构建知识库</li>
 <li>查询<br> 从知识库检索相关上下文信息，以辅助 <code>LLM</code> 回答问题。</li>
 </ol>
 <p><code>LlamaIndex</code> 提供了工具包帮助开发者极其便捷地完成这两个阶段的工作。</p>
-<h4 id="索引阶段"><a href="#索引阶段" class="headerlink" title="索引阶段"></a>索引阶段</h4><p>LlamaIndex 通过提供 Data connectors(数据连接器) 和 Indexes (索引) 帮助开发者构建知识库。<br>该阶段会用到如下工具或组件：</p>
+<h4 id="2-1-1-索引阶段"><a href="#2-1-1-索引阶段" class="headerlink" title="2.1.1 索引阶段"></a>2.1.1 索引阶段</h4><p>LlamaIndex 通过提供 Data connectors(数据连接器) 和 Indexes (索引) 帮助开发者构建知识库。<br>该阶段会用到如下工具或组件：</p>
 <ul>
 <li>Data connectors<br>  数据连接器。它负责将来自不同数据源的不同格式的数据注入，并转换为 <code>LlamaIndex</code> 支持的文档（Document）表现形式，其中包含了文本和元数据。</li>
 <li>Documents / Nodes<br>  Document是 <code>LlamaIndex</code> 中容器的概念，它可以包含任何数据源，包括，PDF文档，API响应，或来自数据库的数据。<br>  Node是 <code>LlamaIndex</code> 中数据的最小单元，代表了一个 Document的分块。它还包含了元数据，以及与其他Node的关系信息。这使得更精确的检索操作成为可能。</li>
 <li>Data Indexes<br>  <code>LlamaIndex</code> 提供便利的工具，帮助开发者为注入的数据建立索引，使得未来的检索简单而高效。最常用的索引是向量存储索引 - <code>VectorStoreIndex</code> 。</li>
 </ul>
-<h4 id="查询阶段"><a href="#查询阶段" class="headerlink" title="查询阶段"></a>查询阶段</h4><p>在查询阶段，<code>RAG</code> 管道根据的用户查询，检索最相关的上下文，并将其与查询一起，传递给 <code>LLM</code> ，以合成响应。这使 <code>LLM</code> 能够获得不在其原始训练数据中的最新知识，同时也减少了虚构内容。该阶段的关键挑战在于检索、编排和基于知识库的推理。</p>
+<h4 id="2-1-2-查询阶段"><a href="#2-1-2-查询阶段" class="headerlink" title="2.1.2 查询阶段"></a>2.1.2 查询阶段</h4><p>在查询阶段，<code>RAG</code> 管道根据的用户查询，检索最相关的上下文，并将其与查询一起，传递给 <code>LLM</code> ，以合成响应。这使 <code>LLM</code> 能够获得不在其原始训练数据中的最新知识，同时也减少了虚构内容。该阶段的关键挑战在于检索、编排和基于知识库的推理。</p>
 <p><code>LlamaIndex</code> 提供可组合的模块，帮助开发者构建和集成 <code>RAG</code> 管道，用于问答、聊天机器人或作为代理的一部分。这些构建块可以根据排名偏好进行定制，并组合起来，以结构化的方式基于多个知识库进行推理。</p>
 <p>该阶段的构建块包括：</p>
 <ul>
@@ -615,7 +615,7 @@
 <li>Chat Engines<br>  聊天引擎 - 端到端的管道，允许用户基于知识库进行对话（多次交互，会话历史）。</li>
 <li>Agents<br>  代理。它是一种由 LLM 驱动的自动化决策器。代理可以像查询引擎或聊天引擎一样使用。主要区别在于，代理动态地决定最佳的动作序列，而不是遵循预定的逻辑。这为其提供了处理更复杂任务的额外灵活性。</li>
 </ul>
-<h3 id="个性化配置"><a href="#个性化配置" class="headerlink" title="个性化配置"></a>个性化配置</h3><p><code>LlamaIndex</code> 对 <code>RAG</code> 过程提供了全面的配置支持，允许开发者对整个过程进行个性化设置。常见的配置场景包括：</p>
+<h3 id="2-2-个性化配置"><a href="#2-2-个性化配置" class="headerlink" title="2.2 个性化配置"></a>2.2 个性化配置</h3><p><code>LlamaIndex</code> 对 <code>RAG</code> 过程提供了全面的配置支持，允许开发者对整个过程进行个性化设置。常见的配置场景包括：</p>
 <ul>
 <li>自定义文档分块</li>
 <li>自定义向量存储</li>
@@ -625,7 +625,7 @@
 <blockquote>
 <p>注，个性化配置主要通过 LlamaIndex 提供的 ServiceContext 类实现。</p>
 </blockquote>
-<h4 id="配置场景示例"><a href="#配置场景示例" class="headerlink" title="配置场景示例"></a>配置场景示例</h4><p>接下来通过简明示例代码段展示 LlamaIndex 对各种配置场景的支持。</p>
+<h4 id="2-2-1-配置场景示例"><a href="#2-2-1-配置场景示例" class="headerlink" title="2.2.1 配置场景示例"></a>2.2.1 配置场景示例</h4><p>接下来通过简明示例代码段展示 LlamaIndex 对各种配置场景的支持。</p>
 <h5 id="自定义文档分块"><a href="#自定义文档分块" class="headerlink" title="自定义文档分块"></a>自定义文档分块</h5><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> llama_index <span class="token keyword">import</span> ServiceContext
 service_context <span class="token operator">=</span> ServiceContext<span class="token punctuation">.</span>from_defaults<span class="token punctuation">(</span>chunk_size<span class="token operator">=</span><span class="token number">500</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -639,11 +639,11 @@ chroma_collection <span class="token operator">=</span> chroma_client<span class
 query_engine <span class="token operator">=</span> index<span class="token punctuation">.</span>as_query_engine<span class="token punctuation">(</span>similarity_top_k<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h5 id="指定LLM"><a href="#指定LLM" class="headerlink" title="指定LLM"></a>指定LLM</h5><pre class="line-numbers language-python" data-language="python"><code class="language-python">service_context <span class="token operator">=</span> ServiceContext<span class="token punctuation">.</span>from_defaults<span class="token punctuation">(</span>llm<span class="token operator">=</span>OpenAI<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="LlamaIndex实现RAG"><a href="#LlamaIndex实现RAG" class="headerlink" title="LlamaIndex实现RAG"></a>LlamaIndex实现RAG</h2><p>通过实操简单实现一下LlamaIndex实现RAG系统。</p>
+<h2 id="三、LlamaIndex实现RAG"><a href="#三、LlamaIndex实现RAG" class="headerlink" title="三、LlamaIndex实现RAG"></a>三、LlamaIndex实现RAG</h2><p>通过实操简单实现一下LlamaIndex实现RAG系统。</p>
 <p>创建虚拟环境</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">-n</span> llamaindex-learn
 conda activate llamaindex-learn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="加载文档"><a href="#加载文档" class="headerlink" title="加载文档"></a>加载文档</h3><p>安装LlamaIndex核心库</p>
+<h3 id="3-1-加载文档"><a href="#3-1-加载文档" class="headerlink" title="3.1 加载文档"></a>3.1 加载文档</h3><p>安装LlamaIndex核心库</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> llama-index<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> llama_index<span class="token punctuation">.</span>core <span class="token keyword">import</span> SimpleDirectoryReader
@@ -656,7 +656,7 @@ conda activate llamaindex-learn<span aria-hidden="true" class="line-numbers-rows
 documents <span class="token operator">=</span> SimpleDirectoryReader<span class="token punctuation">(</span>input_files<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"data/pdf内容研报.pdf"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>load_data<span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>documents<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="本地调用大模型"><a href="#本地调用大模型" class="headerlink" title="本地调用大模型"></a>本地调用大模型</h3><p>安装huggingface的本地调用包</p>
+<h3 id="3-2-本地调用大模型"><a href="#3-2-本地调用大模型" class="headerlink" title="3.2 本地调用大模型"></a>3.2 本地调用大模型</h3><p>安装huggingface的本地调用包</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> llama-index-llms-huggingface<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>下载大模型：</p>
@@ -695,7 +695,7 @@ rsp <span class="token operator">=</span> llm<span class="token punctuation">.</
 
 为了准确回答，我需要确认XTuner的常见定义。可能需要查找相关资料，比如在GitHub上搜索XTuner，或者查看是否有相关的技术文档。但假设我现在无法访问外部<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看到，我们是问的<code>XTuner</code> 是一个大模型微调框架，但是大模型本身没有关于它的信息，所以大模型就给我们生成一些有的没的内容，这就是大模型产生了幻觉。</p>
-<h3 id="Embedding模型"><a href="#Embedding模型" class="headerlink" title="Embedding模型"></a>Embedding模型</h3><p>安装魔塔社区SDK</p>
+<h3 id="3-3-Embedding模型"><a href="#3-3-Embedding模型" class="headerlink" title="3.3 Embedding模型"></a>3.3 Embedding模型</h3><p>安装魔塔社区SDK</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> modelscope<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>安装 <code>llama-index-embeddings-huggingface</code> 包和下载Embedding模型</p>
@@ -792,7 +792,7 @@ rsp <span class="token operator">=</span> query_engine<span class="token punctua
 =======================<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>回答的基本上是没问题的。</p>
-<h3 id="持久化向量库存储"><a href="#持久化向量库存储" class="headerlink" title="持久化向量库存储"></a>持久化向量库存储</h3><p>构建一个可以永久化保存的向量存储库</p>
+<h3 id="3-4-持久化向量库存储"><a href="#3-4-持久化向量库存储" class="headerlink" title="3.4 持久化向量库存储"></a>3.4 持久化向量库存储</h3><p>构建一个可以永久化保存的向量存储库</p>
 <p>安装相应环境包</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> chromadb
 pip <span class="token function">install</span> llama-index-vector-stores-chroma<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -827,7 +827,7 @@ vector_store <span class="token operator">=</span> ChromaVectorStore<span class=
 storage_context <span class="token operator">=</span> StorageContext<span class="token punctuation">.</span>from_defaults<span class="token punctuation">(</span>vector_store<span class="token operator">=</span>vector_store<span class="token punctuation">)</span>
 <span class="token comment"># storage_context = ServiceContext.from_defaults(vector_store=vector_store)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="将文档解析为更小的块"><a href="#将文档解析为更小的块" class="headerlink" title="将文档解析为更小的块"></a>将文档解析为更小的块</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> llama_index<span class="token punctuation">.</span>embeddings<span class="token punctuation">.</span>huggingface <span class="token keyword">import</span> HuggingFaceEmbedding
+<h3 id="3-5-将文档解析为更小的块"><a href="#3-5-将文档解析为更小的块" class="headerlink" title="3.5 将文档解析为更小的块"></a>3.5 将文档解析为更小的块</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> llama_index<span class="token punctuation">.</span>embeddings<span class="token punctuation">.</span>huggingface <span class="token keyword">import</span> HuggingFaceEmbedding
 <span class="token keyword">from</span> llama_index<span class="token punctuation">.</span>core <span class="token keyword">import</span> Settings<span class="token punctuation">,</span>SimpleDirectoryReader<span class="token punctuation">,</span>VectorStoreIndex
 <span class="token keyword">from</span> llama_index<span class="token punctuation">.</span>llms<span class="token punctuation">.</span>huggingface <span class="token keyword">import</span> HuggingFaceLLM
 
@@ -918,7 +918,7 @@ Given the context information and not prior knowledge, answer the query. Query: 
 Answer: 从使用XTuner开始，首先需要将HuggingFace adapter合并到大语言模型，然后使用任意推理框架部署微调后的模型。 
 --------------------- 
 =======================<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<p>这个回答其实没有之前的回答要好，这里就是因为切割的方式以及我们本地文档没有做一些处理的问题，如果在构建RAG系统时想要一个好的效果，需要对我们的知识库进行整理，然后在配合 <code>LlamaIndex</code> 的一些处理文档的方法就可以达到一个更好的效果。</p>
 <h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h3 id="一、在代码处执行报错："><a href="#一、在代码处执行报错：" class="headerlink" title="一、在代码处执行报错："></a>一、在代码处执行报错：</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 声明向量存储</span>
 vector_store <span class="token operator">=</span> ChromaVectorStore<span class="token punctuation">(</span>chroma_collection<span class="token operator">=</span>chroma_collection<span class="token punctuation">)</span>
 storage_context <span class="token operator">=</span> ServiceContext<span class="token punctuation">.</span>from_defaults<span class="token punctuation">(</span>vector_store<span class="token operator">=</span>vector_store<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -1361,7 +1361,7 @@ storage_context <span class="token operator">=</span> ServiceContext<span class=
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">29.2k</span>
+                        class="white-color">29.3k</span>
             
             
             
