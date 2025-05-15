@@ -1,0 +1,2122 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="【AI大模型应用学习笔记】学习LangChain大模型能力封装工具框架, AI,Python,C,C++,Linux">
+    <meta name="description" content="学习目标：1. 如何使用 LangChain：一套在大模型能力上封装的工具框架2. 如何用几行代码实现一个复杂的 AI 应用3. 面向大模型的流程开发的过程抽象">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>【AI大模型应用学习笔记】学习LangChain大模型能力封装工具框架 | 墨宇Logic</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(https://pic1.imgdb.cn/item/680901b758cb8da5c8c6b23f.webp);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+ 
+    <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },2500); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+</script>
+ 
+<body>
+    
+        <div id="loading-container">
+             <p class="loading-text">嘘~  正在从服务器偷取页面 . . . </p> 
+             <div class="loading-image">
+                 <div></div>
+                 <div></div>
+                 <div></div>
+                 <div></div> 
+                 <div></div>
+             </div>
+        </div>
+    
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">墨宇Logic</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">墨宇Logic</div>
+        <div class="logo-desc">
+            
+            这里是墨宇的个人博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/ismoyuai" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/ismoyuai" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">【AI大模型应用学习笔记】学习LangChain大模型能力封装工具框架</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/RAG/">
+                                <span class="chip bg-color">RAG</span>
+                            </a>
+                        
+                            <a href="/tags/Agent/">
+                                <span class="chip bg-color">Agent</span>
+                            </a>
+                        
+                            <a href="/tags/AI/">
+                                <span class="chip bg-color">AI</span>
+                            </a>
+                        
+                            <a href="/tags/Embeddings/">
+                                <span class="chip bg-color">Embeddings</span>
+                            </a>
+                        
+                            <a href="/tags/LangChain/">
+                                <span class="chip bg-color">LangChain</span>
+                            </a>
+                        
+                            <a href="/tags/LLM/">
+                                <span class="chip bg-color">LLM</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                AI大模型应用开发
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-04-17
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-05-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    19 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="LangChain"><a href="#LangChain" class="headerlink" title="LangChain"></a>LangChain</h1><p>💡 这篇文章会带给你</p>
+<ol>
+<li>如何使用 LangChain：一套在大模型能力上封装的工具框架</li>
+<li>如何用几行代码实现一个复杂的 AI 应用</li>
+<li>面向大模型的流程开发的过程抽象</li>
+</ol>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>官网：<a target="_blank" rel="noopener" href="https://www.langchain.com/">https://www.langchain.com/</a></p>
+<ul>
+<li>LangChain 也是一套面向大模型的开发框架（SDK）</li>
+<li>LangChain 是 AGI 时代软件工程的一个探索和原型</li>
+<li>学习 LangChain 要关注接口变更</li>
+</ul>
+<h2 id="LangChain-的核心组件"><a href="#LangChain-的核心组件" class="headerlink" title="LangChain 的核心组件"></a>LangChain 的核心组件</h2><ol>
+<li>模型 I/O 封装<ul>
+<li>LLMs：大语言模型</li>
+<li>Chat Models：一般基于 LLMs，但按对话结构重新封装</li>
+<li>PromptTemple：提示词模板</li>
+<li>OutputParser：解析输出</li>
+</ul>
+</li>
+<li>数据连接封装<ul>
+<li>Document Loaders：各种格式文件的加载器</li>
+<li>Document Transformers：对文档的常用操作，如：split, filter, translate, extract metadata, etc</li>
+<li>Text Embedding Models：文本向量化表示，用于检索等操作（啥意思？别急，后面详细讲）</li>
+<li>Verctorstores: （面向检索的）向量的存储</li>
+<li>Retrievers: 向量的检索</li>
+</ul>
+</li>
+<li>对话历史管理<ul>
+<li>对话历史的存储、加载与剪裁</li>
+</ul>
+</li>
+<li>架构封装<ul>
+<li>Chain：实现一个功能或者一系列顺序功能组合</li>
+<li>Agent：根据用户输入，自动规划执行步骤，自动选择每步需要的工具，最终完成用户指定的功能<ul>
+<li>Tools：调用外部功能的函数，例如：调 google 搜索、文件 I/O、Linux Shell 等等</li>
+<li>Toolkits：操作某软件的一组工具集，例如：操作 DB、操作 Gmail 等等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Callbacks</li>
+</ol>
+<h3 id="文档（以-Python-版为例）"><a href="#文档（以-Python-版为例）" class="headerlink" title="文档（以 Python 版为例）"></a>文档（以 Python 版为例）</h3><ul>
+<li>功能模块：<a target="_blank" rel="noopener" href="https://python.langchain.com/docs/get_started/introduction">https://python.langchain.com/docs/get_started/introduction</a></li>
+<li>API 文档：<a target="_blank" rel="noopener" href="https://api.python.langchain.com/en/latest/langchain_api_reference.html">https://api.python.langchain.com/en/latest/langchain_api_reference.html</a></li>
+<li>三方组件集成：<a target="_blank" rel="noopener" href="https://python.langchain.com/docs/integrations/platforms/">https://python.langchain.com/docs/integrations/platforms/</a></li>
+<li>官方应用案例：<a target="_blank" rel="noopener" href="https://python.langchain.com/docs/use_cases">https://python.langchain.com/docs/use_cases</a></li>
+<li>调试部署等指导：<a target="_blank" rel="noopener" href="https://python.langchain.com/docs/guides/debugging">https://python.langchain.com/docs/guides/debugging</a></li>
+</ul>
+<div class="alert alert-success">
+<b>划重点：</b> 创建一个新的 conda 环境，<b>langchain-learn</b>，再开始下面的学习！
+</div>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">conda create <span class="token operator">-</span>n langchain-learn python=3<span class="token punctuation">.</span>10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+## 一、 模型 I/O 封装
+
+<p>把不同的模型，统一装成一个接口，方便更换模型而不用重构代码。</p>
+<h3 id="1-1-模型-API-LLM-vs-ChatModel"><a href="#1-1-模型-API-LLM-vs-ChatModel" class="headerlink" title="1.1 模型 API: LLM vs. ChatModel"></a>1.1 模型 API: LLM vs. ChatModel</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> langchain
+pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> langchain-openai
+pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> langchain-community<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-1-1-OpenAI-模型封装"><a href="#1-1-1-OpenAI-模型封装" class="headerlink" title="1.1.1 OpenAI 模型封装"></a>1.1.1 OpenAI 模型封装</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+
+llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">)</span>  <span class="token comment"># 默认是gpt-3.5-turbo</span>
+response <span class="token operator">=</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"你是谁"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="1-1-2-多轮对话-Session-封装"><a href="#1-1-2-多轮对话-Session-封装" class="headerlink" title="1.1.2 多轮对话 Session 封装"></a>1.1.2 多轮对话 Session 封装</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>schema <span class="token keyword">import</span> <span class="token punctuation">(</span>
+    AIMessage<span class="token punctuation">,</span>      <span class="token comment"># 等价于OpenAI接口中的Assistant role</span>
+    HumanMessage<span class="token punctuation">,</span>   <span class="token comment"># 等价于OpenAI接口中的User role</span>
+    SystemMessage<span class="token punctuation">,</span>  <span class="token comment"># 等价于OpenAI接口中的System role</span>
+<span class="token punctuation">)</span>
+
+messages <span class="token operator">=</span> <span class="token punctuation">[</span>
+    SystemMessage<span class="token punctuation">(</span>content<span class="token operator">=</span><span class="token string">"你是一个有用的编程学习智能助手"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">(</span>content<span class="token operator">=</span><span class="token string">"我是一名正在自学编程的学生，我叫墨智Logic"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    AIMessage<span class="token punctuation">(</span>content<span class="token operator">=</span><span class="token string">"欢迎，墨智Logic！我很高兴能帮助你学习编程。"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">(</span>content<span class="token operator">=</span><span class="token string">"我是谁？"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+
+ret <span class="token operator">=</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>messages<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>ret<span class="token punctuation">.</span>content<span class="token punctuation">)</span>  <span class="token comment"># 返回的内容是一个字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><b>划重点：</b>通过模型封装，实现不同模型的统一接口调用</p>
+</blockquote>
+<h3 id="1-2-模型的输入与输出"><a href="#1-2-模型的输入与输出" class="headerlink" title="1.2 模型的输入与输出"></a>1.2 模型的输入与输出</h3><h4 id="1-2-1-Prompt-模板封装"><a href="#1-2-1-Prompt-模板封装" class="headerlink" title="1.2.1 Prompt 模板封装"></a>1.2.1 Prompt 模板封装</h4><ol>
+<li>PromptTemplate 可以在模板中自定义变量</li>
+</ol>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> PromptTemplate
+
+template <span class="token operator">=</span> PromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span><span class="token string">"给我讲一个关于{topic}的笑话"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"===Template==="</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>template<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"===Prompt==="</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>template<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>topic<span class="token operator">=</span><span class="token string">"吉尼太美"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 直接使用模板生成</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Prompt
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+
+llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">)</span>  <span class="token comment"># 默认是gpt-3.5-turbo</span>
+response <span class="token operator">=</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>template<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>topic<span class="token operator">=</span><span class="token string">"吉尼太美"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 打印输出</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>content<span class="token punctuation">)</span>  <span class="token comment"># 返回的内容是一个字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>ChatPromptTemplate 用模板表示的对话上下文</li>
+</ol>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> <span class="token punctuation">(</span>
+    ChatPromptTemplate<span class="token punctuation">,</span>
+    HumanMessagePromptTemplate<span class="token punctuation">,</span>
+    SystemMessagePromptTemplate<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+
+template <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_messages<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>
+        SystemMessagePromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span><span class="token string">"你是一个{product}的智能助手，你的名字叫{name}"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        HumanMessagePromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span><span class="token string">"{query}"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">)</span>  <span class="token comment"># 默认是gpt-3.5-turbo</span>
+prompt <span class="token operator">=</span> template<span class="token punctuation">.</span>format_messages<span class="token punctuation">(</span>
+    product<span class="token operator">=</span><span class="token string">"编程学习"</span><span class="token punctuation">,</span>
+    name<span class="token operator">=</span><span class="token string">"墨智Logic"</span><span class="token punctuation">,</span>
+    query<span class="token operator">=</span><span class="token string">"你是谁？"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>prompt<span class="token punctuation">)</span>  <span class="token comment"># 打印Prompt</span>
+
+ret <span class="token operator">=</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>prompt<span class="token punctuation">)</span>  <span class="token comment"># 调用LLM</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>ret<span class="token punctuation">.</span>content<span class="token punctuation">)</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>MessagesPlaceholder 把多轮对话变成模板</li>
+</ol>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> <span class="token punctuation">(</span>
+    ChatPromptTemplate<span class="token punctuation">,</span>
+    HumanMessagePromptTemplate<span class="token punctuation">,</span>
+    MessagesPlaceholder<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+human_prompt <span class="token operator">=</span> <span class="token string">"Translate your answer to {language}."</span>
+human_message_template <span class="token operator">=</span> HumanMessagePromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>human_prompt<span class="token punctuation">)</span>
+
+chat_prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_messages<span class="token punctuation">(</span>
+    <span class="token comment"># variable_name 是 message placeholder 在模板中的变量名</span>
+    <span class="token comment"># 用于在赋值时使用</span>
+    <span class="token punctuation">[</span>MessagesPlaceholder<span class="token punctuation">(</span><span class="token string">"history"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> human_message_template<span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>messages <span class="token keyword">import</span> AIMessage<span class="token punctuation">,</span> HumanMessage
+
+human_message <span class="token operator">=</span> HumanMessage<span class="token punctuation">(</span>content<span class="token operator">=</span><span class="token string">"Who is Elon Musk?"</span><span class="token punctuation">)</span>
+
+ai_message <span class="token operator">=</span> AIMessage<span class="token punctuation">(</span>
+    content<span class="token operator">=</span><span class="token string">"Elon Musk is a billionaire entrepreneur, inventor, and industrial designer."</span>
+<span class="token punctuation">)</span>
+
+messages <span class="token operator">=</span> chat_prompt<span class="token punctuation">.</span>format_prompt<span class="token punctuation">(</span>
+    <span class="token comment"># 对 "history" 变量赋值 和 "language" 变量赋值</span>
+    history<span class="token operator">=</span><span class="token punctuation">[</span>human_message<span class="token punctuation">,</span> ai_message<span class="token punctuation">]</span><span class="token punctuation">,</span> language<span class="token operator">=</span><span class="token string">"中文"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>messages<span class="token punctuation">.</span>to_messages<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 打印消息列表</span>
+result <span class="token operator">=</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>messages<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>content<span class="token punctuation">)</span>  <span class="token comment"># 打印结果</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><b>划重点：</b>把Prompt模板看作带有参数的函数</p>
+</blockquote>
+<h4 id="1-2-2-从文件加载-Prompt-模板"><a href="#1-2-2-从文件加载-Prompt-模板" class="headerlink" title="1.2.2 从文件加载 Prompt 模板"></a>1.2.2 从文件加载 Prompt 模板</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> PromptTemplate
+
+template <span class="token operator">=</span> PromptTemplate<span class="token punctuation">.</span>from_file<span class="token punctuation">(</span><span class="token string">"example_prompt_template.txt"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"===Template==="</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>template<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"===Prompt==="</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>template<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>topic<span class="token operator">=</span><span class="token string">'黑色幽默'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="1-3-结构化输出"><a href="#1-3-结构化输出" class="headerlink" title="1.3 结构化输出"></a>1.3 结构化输出</h3><h4 id="1-3-1-直接输出-Pydantic-对象"><a href="#1-3-1-直接输出-Pydantic-对象" class="headerlink" title="1.3.1 直接输出 Pydantic 对象"></a>1.3.1 直接输出 Pydantic 对象</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pydantic <span class="token keyword">import</span> BaseModel<span class="token punctuation">,</span> Field
+
+<span class="token comment"># 定义你的输出对象</span>
+<span class="token keyword">class</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>BaseModel<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    year<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"Year"</span><span class="token punctuation">)</span>
+    month<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"Month"</span><span class="token punctuation">)</span>
+    day<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"Day"</span><span class="token punctuation">)</span>
+    era<span class="token punctuation">:</span> <span class="token builtin">str</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"BC or AD"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> PromptTemplate<span class="token punctuation">,</span> ChatPromptTemplate<span class="token punctuation">,</span> HumanMessagePromptTemplate
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+
+<span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>output_parsers <span class="token keyword">import</span> PydanticOutputParser
+
+
+model_name <span class="token operator">=</span> <span class="token string">'gpt-4o-mini'</span>
+temperature <span class="token operator">=</span> <span class="token number">0</span>
+llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model_name<span class="token operator">=</span>model_name<span class="token punctuation">,</span> temperature<span class="token operator">=</span>temperature<span class="token punctuation">)</span>
+
+<span class="token comment"># 定义结构化输出的模型</span>
+structured_llm <span class="token operator">=</span> llm<span class="token punctuation">.</span>with_structured_output<span class="token punctuation">(</span>Date<span class="token punctuation">)</span>
+
+template <span class="token operator">=</span> <span class="token triple-quoted-string string">"""提取用户输入中的日期。
+用户输入:
+{query}"""</span>
+
+prompt <span class="token operator">=</span> PromptTemplate<span class="token punctuation">(</span>
+    template<span class="token operator">=</span>template<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+query <span class="token operator">=</span> <span class="token string">"2025年四月16日天气阴..."</span>
+input_prompt <span class="token operator">=</span> prompt<span class="token punctuation">.</span>format_prompt<span class="token punctuation">(</span>query<span class="token operator">=</span>query<span class="token punctuation">)</span>
+
+structured_llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>input_prompt<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="1-3-2-输出指定格式的-JSON"><a href="#1-3-2-输出指定格式的-JSON" class="headerlink" title="1.3.2 输出指定格式的 JSON"></a>1.3.2 输出指定格式的 JSON</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">json_schema <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">"title"</span><span class="token punctuation">:</span> <span class="token string">"Date"</span><span class="token punctuation">,</span>
+    <span class="token string">"description"</span><span class="token punctuation">:</span> <span class="token string">"Formated date expression"</span><span class="token punctuation">,</span>
+    <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"object"</span><span class="token punctuation">,</span>
+    <span class="token string">"properties"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"integer"</span><span class="token punctuation">,</span>
+            <span class="token string">"description"</span><span class="token punctuation">:</span> <span class="token string">"year, YYYY"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"month"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"integer"</span><span class="token punctuation">,</span>
+            <span class="token string">"description"</span><span class="token punctuation">:</span> <span class="token string">"month, MM"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"day"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"integer"</span><span class="token punctuation">,</span>
+            <span class="token string">"description"</span><span class="token punctuation">:</span> <span class="token string">"day, DD"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">"era"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"string"</span><span class="token punctuation">,</span>
+            <span class="token string">"description"</span><span class="token punctuation">:</span> <span class="token string">"BC or AD"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+structured_llm <span class="token operator">=</span> llm<span class="token punctuation">.</span>with_structured_output<span class="token punctuation">(</span>json_schema<span class="token punctuation">)</span>
+
+structured_llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>input_prompt<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="1-3-3-使用-JsonOutputParser"><a href="#1-3-3-使用-JsonOutputParser" class="headerlink" title="1.3.3 使用 JsonOutputParser"></a>1.3.3 使用 JsonOutputParser</h4><p><a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/concepts/#output-parsers"><code>OutputParser</code></a> 可以按指定格式解析模型的输出</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>output_parsers <span class="token keyword">import</span> JsonOutputParser
+
+parser <span class="token operator">=</span> JsonOutputParser<span class="token punctuation">(</span>pydantic_object<span class="token operator">=</span>Date<span class="token punctuation">)</span>
+
+prompt <span class="token operator">=</span> PromptTemplate<span class="token punctuation">(</span>
+    template<span class="token operator">=</span><span class="token string">"提取用户输入中的日期。\n用户输入:{query}\n{format_instructions}"</span><span class="token punctuation">,</span>
+    input_variables<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"query"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    partial_variables<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"format_instructions"</span><span class="token punctuation">:</span> parser<span class="token punctuation">.</span>get_format_instructions<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+input_prompt <span class="token operator">=</span> prompt<span class="token punctuation">.</span>format_prompt<span class="token punctuation">(</span>query<span class="token operator">=</span>query<span class="token punctuation">)</span>
+output <span class="token operator">=</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>input_prompt<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"原始输出:\n"</span><span class="token operator">+</span>output<span class="token punctuation">.</span>content<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\n解析后:"</span><span class="token punctuation">)</span>
+parser<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>output<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>也可以用 <code>PydanticOutputParser</code></p>
+<blockquote>
+<p><b>这里在Pycharm中需要用参数接收parser.invoke(output)的值，然后用print打印出来才能在终端显示结果内容，否则是空白。后续的地方都类似</b></p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>output_parsers <span class="token keyword">import</span> PydanticOutputParser
+
+parser <span class="token operator">=</span> PydanticOutputParser<span class="token punctuation">(</span>pydantic_object<span class="token operator">=</span>Date<span class="token punctuation">)</span>
+
+input_prompt <span class="token operator">=</span> prompt<span class="token punctuation">.</span>format_prompt<span class="token punctuation">(</span>query<span class="token operator">=</span>query<span class="token punctuation">)</span>
+output <span class="token operator">=</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>input_prompt<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"原始输出:\n"</span><span class="token operator">+</span>output<span class="token punctuation">.</span>content<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\n解析后:"</span><span class="token punctuation">)</span>
+parser<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>output<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>OutputFixingParser</code> 利用大模型做格式自动纠错</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>output_parsers <span class="token keyword">import</span> OutputFixingParser
+
+new_parser <span class="token operator">=</span> OutputFixingParser<span class="token punctuation">.</span>from_llm<span class="token punctuation">(</span>parser<span class="token operator">=</span>parser<span class="token punctuation">,</span> llm<span class="token operator">=</span>ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+bad_output <span class="token operator">=</span> output<span class="token punctuation">.</span>content<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"5"</span><span class="token punctuation">,</span><span class="token string">"五"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"PydanticOutputParser:"</span><span class="token punctuation">)</span>
+<span class="token keyword">try</span><span class="token punctuation">:</span>
+    parser<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>bad_output<span class="token punctuation">)</span>
+<span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"OutputFixingParser:"</span><span class="token punctuation">)</span>
+new_parser<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>bad_output<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="1-4-Function-Calling"><a href="#1-4-Function-Calling" class="headerlink" title="1.4 Function Calling"></a>1.4 Function Calling</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>tools <span class="token keyword">import</span> tool
+
+<span class="token decorator annotation punctuation">@tool</span>
+<span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Add two integers.
+
+    Args:
+        a: First integer
+        b: Second integer
+    """</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b
+
+<span class="token decorator annotation punctuation">@tool</span>
+<span class="token keyword">def</span> <span class="token function">multiply</span><span class="token punctuation">(</span>a<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Multiply two integers.
+
+    Args:
+        a: First integer
+        b: Second integer
+    """</span>
+    <span class="token keyword">return</span> a <span class="token operator">*</span> b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> json
+
+llm_with_tools <span class="token operator">=</span> llm<span class="token punctuation">.</span>bind_tools<span class="token punctuation">(</span><span class="token punctuation">[</span>add<span class="token punctuation">,</span> multiply<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+query <span class="token operator">=</span> <span class="token string">"3的4倍是多少?"</span>
+messages <span class="token operator">=</span> <span class="token punctuation">[</span>HumanMessage<span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+output <span class="token operator">=</span> llm_with_tools<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>messages<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>output<span class="token punctuation">.</span>tool_calls<span class="token punctuation">,</span> indent<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>回传 Funtion Call 的结果</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+
+available_tools <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"add"</span><span class="token punctuation">:</span> add<span class="token punctuation">,</span> <span class="token string">"multiply"</span><span class="token punctuation">:</span> multiply<span class="token punctuation">}</span>
+
+<span class="token keyword">for</span> tool_call <span class="token keyword">in</span> output<span class="token punctuation">.</span>tool_calls<span class="token punctuation">:</span>
+    selected_tool <span class="token operator">=</span> available_tools<span class="token punctuation">[</span>tool_call<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    tool_msg <span class="token operator">=</span> selected_tool<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>tool_call<span class="token punctuation">)</span>
+    messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span>tool_msg<span class="token punctuation">)</span>
+
+new_output <span class="token operator">=</span> llm_with_tools<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>messages<span class="token punctuation">)</span>
+<span class="token keyword">for</span> message <span class="token keyword">in</span> messages<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> indent<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> ensure_ascii<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>new_output<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="1-5-小结"><a href="#1-5-小结" class="headerlink" title="1.5 小结"></a>1.5 小结</h3><ol>
+<li>LangChain 统一封装了各种模型的调用接口，包括补全型和对话型两种</li>
+<li>LangChain 提供了 PromptTemplate 类，可以自定义带变量的模板</li>
+<li>LangChain 提供了一些列输出解析器，用于将大模型的输出解析成结构化对象</li>
+<li>LangChain 提供了 Function Calling 的封装</li>
+<li>上述模型属于 LangChain 中较为实用的部分</li>
+</ol>
+<h2 id="二、数据连接封装"><a href="#二、数据连接封装" class="headerlink" title="二、数据连接封装"></a>二、数据连接封装</h2><h3 id="2-1-文档加载器：Document-Loaders"><a href="#2-1-文档加载器：Document-Loaders" class="headerlink" title="2.1 文档加载器：Document Loaders"></a>2.1 文档加载器：Document Loaders</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> pymupdf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> PyMuPDFLoader
+
+loader <span class="token operator">=</span> PyMuPDFLoader<span class="token punctuation">(</span><span class="token string">"llama2.pdf"</span><span class="token punctuation">)</span>
+pages <span class="token operator">=</span> loader<span class="token punctuation">.</span>load_and_split<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>pages<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>page_content<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-2-文档处理器"><a href="#2-2-文档处理器" class="headerlink" title="2.2 文档处理器"></a>2.2 文档处理器</h3><h4 id="2-2-1-TextSplitter"><a href="#2-2-1-TextSplitter" class="headerlink" title="2.2.1 TextSplitter"></a>2.2.1 TextSplitter</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">pip install <span class="token operator">-</span><span class="token operator">-</span>upgrade langchain<span class="token operator">-</span>text<span class="token operator">-</span>splitters<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> RecursiveCharacterTextSplitter
+
+<span class="token comment"># 简单的文本内容切割</span>
+text_splitter <span class="token operator">=</span> RecursiveCharacterTextSplitter<span class="token punctuation">(</span>
+    chunk_size<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">,</span>
+    chunk_overlap<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span> 
+    length_function<span class="token operator">=</span><span class="token builtin">len</span><span class="token punctuation">,</span>
+    add_start_index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+paragraphs <span class="token operator">=</span> text_splitter<span class="token punctuation">.</span>create_documents<span class="token punctuation">(</span><span class="token punctuation">[</span>pages<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>page_content<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> para <span class="token keyword">in</span> paragraphs<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>para<span class="token punctuation">.</span>page_content<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'-------'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<div class="alert alert-info">
+类似 LlamaIndex，LangChain 也提供了丰富的 <code><a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/how_to/#document-loaders">Document Loaders</a></code> 和 <code><a target="_blank" rel="noopener" href="https://python.langchain.com/v0.2/docs/how_to/#text-splitters">Text Splitters</a></code>。
+</div>
+
+<h3 id="2-3-向量数据库与向量检索"><a href="#2-3-向量数据库与向量检索" class="headerlink" title="2.3 向量数据库与向量检索"></a>2.3 向量数据库与向量检索</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token function">install</span> <span class="token parameter variable">-c</span> pytorch faiss-cpu<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> OpenAIEmbeddings<span class="token punctuation">,</span> ChatOpenAI
+<span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> RecursiveCharacterTextSplitter
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>vectorstores <span class="token keyword">import</span> FAISS
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> PyMuPDFLoader
+
+<span class="token comment"># 加载文档</span>
+loader <span class="token operator">=</span> PyMuPDFLoader<span class="token punctuation">(</span><span class="token string">"llama2.pdf"</span><span class="token punctuation">)</span>
+pages <span class="token operator">=</span> loader<span class="token punctuation">.</span>load_and_split<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 文档切分</span>
+text_splitter <span class="token operator">=</span> RecursiveCharacterTextSplitter<span class="token punctuation">(</span>
+    chunk_size<span class="token operator">=</span><span class="token number">300</span><span class="token punctuation">,</span>
+    chunk_overlap<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span>
+    length_function<span class="token operator">=</span><span class="token builtin">len</span><span class="token punctuation">,</span>
+    add_start_index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+texts <span class="token operator">=</span> text_splitter<span class="token punctuation">.</span>create_documents<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>page<span class="token punctuation">.</span>page_content <span class="token keyword">for</span> page <span class="token keyword">in</span> pages<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 灌库</span>
+embeddings <span class="token operator">=</span> OpenAIEmbeddings<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"text-embedding-ada-002"</span><span class="token punctuation">)</span>
+db <span class="token operator">=</span> FAISS<span class="token punctuation">.</span>from_documents<span class="token punctuation">(</span>texts<span class="token punctuation">,</span> embeddings<span class="token punctuation">)</span>
+
+<span class="token comment"># 检索 top-3 结果</span>
+retriever <span class="token operator">=</span> db<span class="token punctuation">.</span>as_retriever<span class="token punctuation">(</span>search_kwargs<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"k"</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+docs <span class="token operator">=</span> retriever<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"llama2有多少参数"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 打印检索到的文档</span>
+<span class="token keyword">for</span> doc <span class="token keyword">in</span> docs<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">.</span>page_content<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"----"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>更多的三方检索组件链接，参考：<a target="_blank" rel="noopener" href="https://python.langchain.com/v0.3/docs/integrations/vectorstores/">https://python.langchain.com/v0.3/docs/integrations/vectorstores/</a></p>
+<h3 id="2-4、小结"><a href="#2-4、小结" class="headerlink" title="2.4、小结"></a>2.4、小结</h3><ol>
+<li>文档处理部分，建议在实际应用中详细测试后使用</li>
+<li>与向量数据库的链接部分本质是接口封装，向量数据库需要自己选型</li>
+</ol>
+<h2 id="三、对话历史管理"><a href="#三、对话历史管理" class="headerlink" title="三、对话历史管理"></a>三、对话历史管理</h2><h3 id="3-1、历史记录的剪裁"><a href="#3-1、历史记录的剪裁" class="headerlink" title="3.1、历史记录的剪裁"></a>3.1、历史记录的剪裁</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>messages <span class="token keyword">import</span> <span class="token punctuation">(</span>
+    AIMessage<span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">,</span>
+    SystemMessage<span class="token punctuation">,</span>
+    trim_messages<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+
+messages <span class="token operator">=</span> <span class="token punctuation">[</span>
+    SystemMessage<span class="token punctuation">(</span><span class="token string">"you're a good assistant, you always respond with a joke."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">(</span><span class="token string">"i wonder why it's called langchain"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    AIMessage<span class="token punctuation">(</span>
+        <span class="token string">'Well, I guess they thought "WordRope" and "SentenceString" just didn\'t have the same ring to it!'</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">(</span><span class="token string">"and who is harrison chasing anyways"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    AIMessage<span class="token punctuation">(</span>
+        <span class="token string">"Hmmm let me think.\n\nWhy, he's probably chasing after the last cup of coffee in the office!"</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">(</span><span class="token string">"what do you call a speechless parrot"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+
+trim_messages<span class="token punctuation">(</span>
+    messages<span class="token punctuation">,</span>
+    max_tokens<span class="token operator">=</span><span class="token number">45</span><span class="token punctuation">,</span>
+    strategy<span class="token operator">=</span><span class="token string">"last"</span><span class="token punctuation">,</span>
+    token_counter<span class="token operator">=</span>ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 保留 system prompt</span>
+trim_messages<span class="token punctuation">(</span>
+    messages<span class="token punctuation">,</span>
+    max_tokens<span class="token operator">=</span><span class="token number">45</span><span class="token punctuation">,</span>
+    strategy<span class="token operator">=</span><span class="token string">"last"</span><span class="token punctuation">,</span>
+    token_counter<span class="token operator">=</span>ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    include_system<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+    allow_partial<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="3-2、过滤带标识的历史记录"><a href="#3-2、过滤带标识的历史记录" class="headerlink" title="3.2、过滤带标识的历史记录"></a>3.2、过滤带标识的历史记录</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>messages <span class="token keyword">import</span> <span class="token punctuation">(</span>
+    AIMessage<span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">,</span>
+    SystemMessage<span class="token punctuation">,</span>
+    filter_messages<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+messages <span class="token operator">=</span> <span class="token punctuation">[</span>
+    SystemMessage<span class="token punctuation">(</span><span class="token string">"you are a good assistant"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">(</span><span class="token string">"example input"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"2"</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"example_user"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    AIMessage<span class="token punctuation">(</span><span class="token string">"example output"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"3"</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"example_assistant"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    HumanMessage<span class="token punctuation">(</span><span class="token string">"real input"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"4"</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"bob"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    AIMessage<span class="token punctuation">(</span><span class="token string">"real output"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"5"</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"alice"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+
+<span class="token comment"># 保留包含的消息</span>
+filter_messages<span class="token punctuation">(</span>messages<span class="token punctuation">,</span> include_types<span class="token operator">=</span><span class="token string">"human"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 保留不包含的信息</span>
+filter_messages<span class="token punctuation">(</span>messages<span class="token punctuation">,</span> exclude_names<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"example_user"</span><span class="token punctuation">,</span> <span class="token string">"example_assistant"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 保留包含的消息和不包含的信息</span>
+filter_messages<span class="token punctuation">(</span>messages<span class="token punctuation">,</span> include_types<span class="token operator">=</span><span class="token punctuation">[</span>HumanMessage<span class="token punctuation">,</span> AIMessage<span class="token punctuation">]</span><span class="token punctuation">,</span> exclude_ids<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"3"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="四、Chain-和-LangChain-Expression-Language-LCEL"><a href="#四、Chain-和-LangChain-Expression-Language-LCEL" class="headerlink" title="四、Chain 和 LangChain Expression Language (LCEL)"></a>四、Chain 和 LangChain Expression Language (LCEL)</h2><p>LangChain Expression Language（LCEL）是一种声明式语言，可轻松组合不同的调用顺序构成 Chain。LCEL 自创立之初就被设计为能够支持将原型投入生产环境，<strong>无需代码更改</strong>，从最简单的“提示+LLM”链到最复杂的链（已有用户成功在生产环境中运行包含数百个步骤的 LCEL Chain）。</p>
+<p>LCEL 的一些亮点包括：</p>
+<ol>
+<li><p><strong>流支持</strong>：使用 LCEL 构建 Chain 时，你可以获得最佳的首个令牌时间（即从输出开始到首批输出生成的时间）。对于某些 Chain，这意味着可以直接从 LLM 流式传输令牌到流输出解析器，从而以与 LLM 提供商输出原始令牌相同的速率获得解析后的、增量的输出。</p>
+</li>
+<li><p><strong>异步支持</strong>：任何使用 LCEL 构建的链条都可以通过同步 API（例如，在 Jupyter 笔记本中进行原型设计时）和异步 API（例如，在 LangServe 服务器中）调用。这使得相同的代码可用于原型设计和生产环境，具有出色的性能，并能够在同一服务器中处理多个并发请求。</p>
+</li>
+<li><p><strong>优化的并行执行</strong>：当你的 LCEL 链条有可以并行执行的步骤时（例如，从多个检索器中获取文档），我们会自动执行，无论是在同步还是异步接口中，以实现最小的延迟。</p>
+</li>
+<li><p><strong>重试和回退</strong>：为 LCEL 链的任何部分配置重试和回退。这是使链在规模上更可靠的绝佳方式。目前我们正在添加重试/回退的流媒体支持，因此你可以在不增加任何延迟成本的情况下获得增加的可靠性。</p>
+</li>
+<li><p><strong>访问中间结果</strong>：对于更复杂的链条，访问在最终输出产生之前的中间步骤的结果通常非常有用。这可以用于让最终用户知道正在发生一些事情，甚至仅用于调试链条。你可以流式传输中间结果，并且在每个 LangServe 服务器上都可用。</p>
+</li>
+<li><p><strong>输入和输出模式</strong>：输入和输出模式为每个 LCEL 链提供了从链的结构推断出的 Pydantic 和 JSONSchema 模式。这可以用于输入和输出的验证，是 LangServe 的一个组成部分。</p>
+</li>
+<li><p><strong>无缝 LangSmith 跟踪集成</strong>：随着链条变得越来越复杂，理解每一步发生了什么变得越来越重要。通过 LCEL，所有步骤都自动记录到 LangSmith，以实现最大的可观察性和可调试性。</p>
+</li>
+<li><p><strong>无缝 LangServe 部署集成</strong>：任何使用 LCEL 创建的链都可以轻松地使用 LangServe 进行部署。</p>
+</li>
+</ol>
+<p>原文：<a target="_blank" rel="noopener" href="https://python.langchain.com/docs/expression_language/">https://python.langchain.com/docs/expression_language/</a></p>
+<h3 id="4-1-Pipeline-式调用-PromptTemplate-LLM-和-OutputParser"><a href="#4-1-Pipeline-式调用-PromptTemplate-LLM-和-OutputParser" class="headerlink" title="4.1 Pipeline 式调用 PromptTemplate, LLM 和 OutputParser"></a>4.1 Pipeline 式调用 PromptTemplate, LLM 和 OutputParser</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> PromptTemplate<span class="token punctuation">,</span> ChatPromptTemplate
+<span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>output_parsers <span class="token keyword">import</span> StrOutputParser
+<span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>runnables <span class="token keyword">import</span> RunnablePassthrough
+<span class="token keyword">from</span> pydantic <span class="token keyword">import</span> BaseModel<span class="token punctuation">,</span> Field<span class="token punctuation">,</span> validator
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> List<span class="token punctuation">,</span> Dict<span class="token punctuation">,</span> Optional
+<span class="token keyword">from</span> enum <span class="token keyword">import</span> Enum
+<span class="token keyword">import</span> json<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 输出结构</span>
+<span class="token keyword">class</span> <span class="token class-name">SortEnum</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">,</span> Enum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data <span class="token operator">=</span> <span class="token string">'data'</span>
+    price <span class="token operator">=</span> <span class="token string">'price'</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">OrderingEnum</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">,</span> Enum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ascend <span class="token operator">=</span> <span class="token string">'ascend'</span>
+    descend <span class="token operator">=</span> <span class="token string">'descend'</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Semantics</span><span class="token punctuation">(</span>BaseModel<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    name<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"流量包名称"</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+    price_lower<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"价格下限"</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+    price_upper<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"价格上限"</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+    data_lower<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"流量下限"</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+    data_upper<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"流量上限"</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+    sort_by<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>SortEnum<span class="token punctuation">]</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"按价格或流量排序"</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+    ordering<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>OrderingEnum<span class="token punctuation">]</span> <span class="token operator">=</span> Field<span class="token punctuation">(</span>description<span class="token operator">=</span><span class="token string">"升序或降序排列"</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+
+
+<span class="token comment"># Prompt 模板</span>
+prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_messages<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>
+        <span class="token punctuation">(</span><span class="token string">"system"</span><span class="token punctuation">,</span> <span class="token string">"你是一个语义解析器。你的任务是将用户的输入解析成JSON表示。不要回答用户的问题。"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token string">"human"</span><span class="token punctuation">,</span> <span class="token string">"{text}"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 模型</span>
+llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o"</span><span class="token punctuation">,</span> temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+structured_llm <span class="token operator">=</span> llm<span class="token punctuation">.</span>with_structured_output<span class="token punctuation">(</span>Semantics<span class="token punctuation">)</span>
+
+<span class="token comment"># LCEL 表达式</span>
+runnable <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">{</span><span class="token string">"text"</span><span class="token punctuation">:</span> RunnablePassthrough<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">|</span> prompt <span class="token operator">|</span> structured_llm
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 直接运行</span>
+ret <span class="token operator">=</span> runnable<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"不超过100元的流量大的套餐有哪些"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>
+    json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>
+        ret<span class="token punctuation">.</span><span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        indent <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">,</span>
+        ensure_ascii<span class="token operator">=</span><span class="token boolean">False</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="流式输出"><a href="#流式输出" class="headerlink" title="流式输出"></a>流式输出</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">prompt <span class="token operator">=</span> PromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span><span class="token string">"讲个关于{topic}的笑话"</span><span class="token punctuation">)</span>
+
+runnable <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">{</span><span class="token string">"topic"</span><span class="token punctuation">:</span> RunnablePassthrough<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">|</span> prompt <span class="token operator">|</span> llm <span class="token operator">|</span> StrOutputParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">#### 流式输出</span>
+<span class="token keyword">for</span> s <span class="token keyword">in</span> runnable<span class="token punctuation">.</span>stream<span class="token punctuation">(</span><span class="token string">"小明"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">,</span> flush<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><b>注意:</b> 在当前的文档中 LCEL 产生的对象，被叫做 runnable 或 chain，经常两种叫法混用。本质就是一个自定义调用流程。</p>
+</blockquote>
+<blockquote>
+<p><b>使用 LCEL 的价值，也就是 LangChain 的核心价值。</b><br>官方从不同角度给出了举例说明：<a target="_blank" rel="noopener" href="https://python.langchain.com/v0.1/docs/expression_language/why/">https://python.langchain.com/v0.1/docs/expression_language/why/</a></p>
+</blockquote>
+<h3 id="4-2-用-LCEL-实现-RAG"><a href="#4-2-用-LCEL-实现-RAG" class="headerlink" title="4.2 用 LCEL 实现 RAG"></a>4.2 用 LCEL 实现 RAG</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> OpenAIEmbeddings
+<span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> RecursiveCharacterTextSplitter
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>vectorstores <span class="token keyword">import</span> FAISS
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>chains <span class="token keyword">import</span> RetrievalQA
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> PyMuPDFLoader
+
+<span class="token comment"># 加载文档</span>
+loader <span class="token operator">=</span> PyMuPDFLoader<span class="token punctuation">(</span><span class="token string">"llama2.pdf"</span><span class="token punctuation">)</span>
+pages <span class="token operator">=</span> loader<span class="token punctuation">.</span>load_and_split<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 文档切分</span>
+text_splitter <span class="token operator">=</span> RecursiveCharacterTextSplitter<span class="token punctuation">(</span>
+    chunk_size<span class="token operator">=</span><span class="token number">300</span><span class="token punctuation">,</span>
+    chunk_overlap<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span>
+    length_function<span class="token operator">=</span><span class="token builtin">len</span><span class="token punctuation">,</span>
+    add_start_index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+texts <span class="token operator">=</span> text_splitter<span class="token punctuation">.</span>create_documents<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>page<span class="token punctuation">.</span>page_content <span class="token keyword">for</span> page <span class="token keyword">in</span> pages<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 灌库</span>
+embeddings <span class="token operator">=</span> OpenAIEmbeddings<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"text-embedding-ada-002"</span><span class="token punctuation">)</span>
+db <span class="token operator">=</span> FAISS<span class="token punctuation">.</span>from_documents<span class="token punctuation">(</span>texts<span class="token punctuation">,</span> embeddings<span class="token punctuation">)</span>
+
+<span class="token comment"># 检索 top-2 结果</span>
+retriever <span class="token operator">=</span> db<span class="token punctuation">.</span>as_retriever<span class="token punctuation">(</span>search_kwargs<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"k"</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>schema<span class="token punctuation">.</span>output_parser <span class="token keyword">import</span> StrOutputParser
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>schema<span class="token punctuation">.</span>runnable <span class="token keyword">import</span> RunnablePassthrough
+
+<span class="token comment"># Prompt模板</span>
+template <span class="token operator">=</span> <span class="token triple-quoted-string string">"""Answer the question based only on the following context:
+{context}
+
+Question: {question}
+"""</span>
+prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>template<span class="token punctuation">)</span>
+
+<span class="token comment"># Chain</span>
+rag_chain <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">{</span><span class="token string">"question"</span><span class="token punctuation">:</span> RunnablePassthrough<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"context"</span><span class="token punctuation">:</span> retriever<span class="token punctuation">}</span>
+    <span class="token operator">|</span> prompt
+    <span class="token operator">|</span> llm
+    <span class="token operator">|</span> StrOutputParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+rag_chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"Llama 2有多少参数"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-3-用-LCEL-实现工厂模式（选）"><a href="#4-3-用-LCEL-实现工厂模式（选）" class="headerlink" title="4.3 用 LCEL 实现工厂模式（选）"></a>4.3 用 LCEL 实现工厂模式（选）</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>runnables<span class="token punctuation">.</span>utils <span class="token keyword">import</span> ConfigurableField
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>chat_models <span class="token keyword">import</span> QianfanChatEndpoint
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> <span class="token punctuation">(</span>
+    ChatPromptTemplate<span class="token punctuation">,</span>
+    HumanMessagePromptTemplate<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>schema <span class="token keyword">import</span> HumanMessage
+<span class="token keyword">import</span> os
+
+<span class="token comment"># 模型1</span>
+ernie_model <span class="token operator">=</span> QianfanChatEndpoint<span class="token punctuation">(</span>
+    qianfan_ak<span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">'ERNIE_CLIENT_ID'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    qianfan_sk<span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">'ERNIE_CLIENT_SECRET'</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 模型2</span>
+gpt_model <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">,</span> temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+
+<span class="token comment"># 通过 configurable_alternatives 按指定字段选择模型</span>
+model <span class="token operator">=</span> gpt_model<span class="token punctuation">.</span>configurable_alternatives<span class="token punctuation">(</span>
+    ConfigurableField<span class="token punctuation">(</span><span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"llm"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+    default_key<span class="token operator">=</span><span class="token string">"gpt"</span><span class="token punctuation">,</span> 
+    ernie<span class="token operator">=</span>ernie_model<span class="token punctuation">,</span>
+    <span class="token comment"># claude=claude_model,</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># Prompt 模板</span>
+prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_messages<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>
+        HumanMessagePromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span><span class="token string">"{query}"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># LCEL</span>
+chain <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">{</span><span class="token string">"query"</span><span class="token punctuation">:</span> RunnablePassthrough<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span> 
+    <span class="token operator">|</span> prompt
+    <span class="token operator">|</span> model 
+    <span class="token operator">|</span> StrOutputParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 运行时指定模型 "gpt" or "ernie"</span>
+ret <span class="token operator">=</span> chain<span class="token punctuation">.</span>with_config<span class="token punctuation">(</span>configurable<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"llm"</span><span class="token punctuation">:</span> <span class="token string">"gpt"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"请自我介绍"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>ret<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>扩展阅读：什么是<a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/factory-pattern.html"><strong>工厂模式</strong></a>；<a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-intro.html"><strong>设计模式</strong></a>概览。</p>
+<blockquote>
+<p><b>思考：</b>从模块间解依赖角度，LCEL的意义是什么？</p>
+</blockquote>
+<h3 id="4-4-存储与管理对话历史"><a href="#4-4-存储与管理对话历史" class="headerlink" title="4.4 存储与管理对话历史"></a>4.4 存储与管理对话历史</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>chat_message_histories <span class="token keyword">import</span> SQLChatMessageHistory
+
+<span class="token keyword">def</span> <span class="token function">get_session_history</span><span class="token punctuation">(</span>session_id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 通过 session_id 区分对话历史，并存储在 sqlite 数据库中</span>
+    <span class="token keyword">return</span> SQLChatMessageHistory<span class="token punctuation">(</span>session_id<span class="token punctuation">,</span> <span class="token string">"sqlite:///memory.db"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>messages <span class="token keyword">import</span> HumanMessage
+<span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>runnables<span class="token punctuation">.</span>history <span class="token keyword">import</span> RunnableWithMessageHistory
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>schema<span class="token punctuation">.</span>output_parser <span class="token keyword">import</span> StrOutputParser
+
+model <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">,</span> temperature<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+runnable <span class="token operator">=</span> model <span class="token operator">|</span> StrOutputParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+runnable_with_history <span class="token operator">=</span> RunnableWithMessageHistory<span class="token punctuation">(</span>
+    runnable<span class="token punctuation">,</span> <span class="token comment"># 指定 runnable</span>
+    get_session_history<span class="token punctuation">,</span> <span class="token comment"># 指定自定义的历史管理方法</span>
+<span class="token punctuation">)</span>
+
+runnable_with_history<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>HumanMessage<span class="token punctuation">(</span>content<span class="token operator">=</span><span class="token string">"你好，我叫墨屿"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    config<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"configurable"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"session_id"</span><span class="token punctuation">:</span> <span class="token string">"Moyu"</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>第二轮对话：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">runnable_with_history<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>HumanMessage<span class="token punctuation">(</span>content<span class="token operator">=</span><span class="token string">"你知道我叫什么名字"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    config<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"configurable"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"session_id"</span><span class="token punctuation">:</span> <span class="token string">"Moyu"</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="通过-LCEL，还可以实现"><a href="#通过-LCEL，还可以实现" class="headerlink" title="通过 LCEL，还可以实现"></a>通过 LCEL，还可以实现</h3><ol>
+<li>配置运行时变量：<a target="_blank" rel="noopener" href="https://python.langchain.com/v0.3/docs/how_to/configure/">https://python.langchain.com/v0.3/docs/how_to/configure/</a></li>
+<li>故障回退：<a href="">https://python.langchain.com/v0.3/docs/how_to/fallbacks</a></li>
+<li>故障回退：<a href="">https://python.langchain.com/v0.3/docs/how_to/fallbacks</a></li>
+<li>并行调用：<a target="_blank" rel="noopener" href="https://python.langchain.com/v0.3/docs/how_to/parallel/">https://python.langchain.com/v0.3/docs/how_to/parallel/</a></li>
+<li>逻辑分支：<a target="_blank" rel="noopener" href="https://python.langchain.com/v0.3/docs/how_to/routing/">https://python.langchain.com/v0.3/docs/how_to/routing/</a></li>
+<li>动态创建 Chain: <a target="_blank" rel="noopener" href="https://python.langchain.com/v0.3/docs/how_to/dynamic_chain/">https://python.langchain.com/v0.3/docs/how_to/dynamic_chain/</a></li>
+</ol>
+<p>更多例子：<a target="_blank" rel="noopener" href="https://python.langchain.com/v0.3/docs/how_to/lcel_cheatsheet/">https://python.langchain.com/v0.3/docs/how_to/lcel_cheatsheet/</a></p>
+<h2 id="五、LangServe"><a href="#五、LangServe" class="headerlink" title="五、LangServe"></a>五、LangServe</h2><p>LangServe 用于将 Chain 或者 Runnable 部署成一个 REST API 服务。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 安装 LangServe</span>
+pip install <span class="token operator">-</span><span class="token operator">-</span>upgrade <span class="token string">"langserve[all]"</span>
+
+<span class="token comment"># 也可以只安装一端</span>
+pip install <span class="token string">"langserve[client]"</span>
+pip install <span class="token string">"langserve[server]"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="5-1、Server-端"><a href="#5-1、Server-端" class="headerlink" title="5.1、Server 端"></a>5.1、Server 端</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python</span>
+<span class="token keyword">from</span> fastapi <span class="token keyword">import</span> FastAPI
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> ChatPromptTemplate
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+<span class="token keyword">from</span> langserve <span class="token keyword">import</span> add_routes
+<span class="token keyword">import</span> uvicorn
+
+app <span class="token operator">=</span> FastAPI<span class="token punctuation">(</span>
+  title<span class="token operator">=</span><span class="token string">"LangChain Server"</span><span class="token punctuation">,</span>
+  version<span class="token operator">=</span><span class="token string">"1.0"</span><span class="token punctuation">,</span>
+  description<span class="token operator">=</span><span class="token string">"A simple api server using Langchain's Runnable interfaces"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+model <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o-mini"</span><span class="token punctuation">)</span>
+prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span><span class="token string">"讲一个关于{topic}的笑话"</span><span class="token punctuation">)</span>
+add_routes<span class="token punctuation">(</span>
+    app<span class="token punctuation">,</span>
+    prompt <span class="token operator">|</span> model<span class="token punctuation">,</span>
+    path<span class="token operator">=</span><span class="token string">"/joke"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    uvicorn<span class="token punctuation">.</span>run<span class="token punctuation">(</span>app<span class="token punctuation">,</span> host<span class="token operator">=</span><span class="token string">"localhost"</span><span class="token punctuation">,</span> port<span class="token operator">=</span><span class="token number">9999</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="5-2、Client-端"><a href="#5-2、Client-端" class="headerlink" title="5.2、Client 端"></a>5.2、Client 端</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>
+    <span class="token string">"http://localhost:9999/joke/invoke"</span><span class="token punctuation">,</span>
+    json<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'input'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">'topic'</span><span class="token punctuation">:</span> <span class="token string">'小明'</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>json<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="LangChain-与-LlamaIndex-的错位竞争"><a href="#LangChain-与-LlamaIndex-的错位竞争" class="headerlink" title="LangChain 与 LlamaIndex 的错位竞争"></a>LangChain 与 LlamaIndex 的错位竞争</h2><ul>
+<li>LangChain 侧重与 LLM 本身交互的封装<ul>
+<li>Prompt、LLM、Message、OutputParser 等工具丰富</li>
+<li>在数据处理和 RAG 方面提供的工具相对粗糙</li>
+<li>主打 LCEL 流程封装</li>
+<li>配套 Agent、LangGraph 等智能体与工作流工具</li>
+<li>另有 LangServe 部署工具和 LangSmith 监控调试工具</li>
+</ul>
+</li>
+<li>LlamaIndex 侧重与数据交互的封装<ul>
+<li>数据加载、切割、索引、检索、排序等相关工具丰富</li>
+<li>Prompt、LLM 等底层封装相对单薄</li>
+<li>配套实现 RAG 相关工具</li>
+<li>有 Agent 相关工具，不突出</li>
+</ul>
+</li>
+<li>LlamaIndex 为 LangChain 提供了集成<ul>
+<li>在 LlamaIndex 中调用 LangChain 封装的 LLM 接口：<a target="_blank" rel="noopener" href="https://docs.llamaindex.ai/en/stable/api_reference/llms/langchain/">https://docs.llamaindex.ai/en/stable/api_reference/llms/langchain/</a></li>
+<li>将 LlamaIndex 的 Query Engine 作为 LangChain Agent 的工具：<a target="_blank" rel="noopener" href="https://docs.llamaindex.ai/en/v0.10.17/community/integrations/using_with_langchain.html">https://docs.llamaindex.ai/en/v0.10.17/community/integrations/using_with_langchain.html</a></li>
+<li>LangChain 也 <em>曾经</em> 集成过 LlamaIndex，目前相关接口仍在：<a target="_blank" rel="noopener" href="https://api.python.langchain.com/en/latest/retrievers/langchain_community.retrievers.llama_index.LlamaIndexRetriever.html">https://api.python.langchain.com/en/latest/retrievers/langchain_community.retrievers.llama_index.LlamaIndexRetriever.html</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>LangChain 随着版本迭代可用性有明显提升</li>
+<li>使用 LangChain 要注意维护自己的 Prompt，尽量 Prompt 与代码逻辑解依赖</li>
+<li>它的内置基础工具，建议充分测试效果后再决定是否使用</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">墨宇Logic</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://ismoyuai.github.io/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-xue-xi-langchain-da-mo-xing-feng-zhuang-gong-ju-kuang-jia/">https://ismoyuai.github.io/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-xue-xi-langchain-da-mo-xing-feng-zhuang-gong-ju-kuang-jia/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">墨宇Logic</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/RAG/">
+                                    <span class="chip bg-color">RAG</span>
+                                </a>
+                            
+                                <a href="/tags/Agent/">
+                                    <span class="chip bg-color">Agent</span>
+                                </a>
+                            
+                                <a href="/tags/AI/">
+                                    <span class="chip bg-color">AI</span>
+                                </a>
+                            
+                                <a href="/tags/Embeddings/">
+                                    <span class="chip bg-color">Embeddings</span>
+                                </a>
+                            
+                                <a href="/tags/LangChain/">
+                                    <span class="chip bg-color">LangChain</span>
+                                </a>
+                            
+                                <a href="/tags/LLM/">
+                                    <span class="chip bg-color">LLM</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/win11-wsl2-ubuntu22-04-cuda-anaconda3-pytorch-an-zhuang-zong-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.png" class="responsive-img" alt="WIN11+WSL2+Ubuntu22.04+CUDA+ANACONDA3+Pytorch安装总结">
+                        
+                        <span class="card-title">WIN11+WSL2+Ubuntu22.04+CUDA+ANACONDA3+Pytorch安装总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            关于在win11系统下，使用WSL2来安装Ubuntu22.04系统来配套安装深度学习框架，来进行AI大模型应用开发学习
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-04-17
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%9E%E7%94%A8%E6%95%99%E7%A8%8B/" class="post-category">
+                                    实用教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/ai-da-mo-xing-ying-yong-xue-xi-bi-ji-rag-embedding-vector-zhi-shi-dian-xue-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.png" class="responsive-img" alt="【AI大模型应用学习笔记】RAG-Embedding-Vector知识点学习">
+                        
+                        <span class="card-title">【AI大模型应用学习笔记】RAG-Embedding-Vector知识点学习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            关于RAG-Embedding-Vector知识点，以及RAG实现的基本流程实操记录
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" class="post-category">
+                                    AI大模型应用开发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
+                    </a>
+                    
+                    <a href="/tags/RAG/">
+                        <span class="chip bg-color">RAG</span>
+                    </a>
+                    
+                    <a href="/tags/Embeddings/">
+                        <span class="chip bg-color">Embeddings</span>
+                    </a>
+                    
+                    <a href="/tags/OpenAI/">
+                        <span class="chip bg-color">OpenAI</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 墨宇Logic<br />'
+            + '文章作者: 墨宇Logic<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2025</span>
+            
+            <a href="/about" target="_blank">墨宇Logic</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">49.5k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2025";
+                        var startMonth = "4";
+                        var startDate = "10";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/isMoyuAI" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:loushuaicn@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2542345108" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2542345108" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="https://space.bilibili.com/347413381" class="tooltipped" target="_blank" data-tooltip="关注我的bilbil" data-position="top" data-delay="50">
+        <i class="fa-brands fa-bilibili"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "https://ismoyuai.github.io"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
