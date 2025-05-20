@@ -813,7 +813,7 @@ Generating embeddings: 100%|██████████| 205/205 [00:12&lt;00
 示例节点ID：中华人民共和国劳动法及劳动合同法.json::中华人民共和国劳动合同法 第一条
 索引加载耗时：0.17s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="4-2-核心代码优化及效果对比"><a href="#4-2-核心代码优化及效果对比" class="headerlink" title="4.2 核心代码优化及效果对比"></a><strong>4.2 核心代码优化及效果对比</strong></h3><h4 id="4-2-1-优化策略对比"><a href="#4-2-1-优化策略对比" class="headerlink" title="4.2.1 优化策略对比"></a><strong>4.2.1 优化策略对比</strong></h4><p>主要优化有三个点，增加检索范围，添加重排序模型，设计提示词模板</p>
+<h3 id="4-3-核心代码优化及效果对比"><a href="#4-3-核心代码优化及效果对比" class="headerlink" title="4.3 核心代码优化及效果对比"></a><strong>4.3 核心代码优化及效果对比</strong></h3><h4 id="4-3-1-优化策略对比"><a href="#4-3-1-优化策略对比" class="headerlink" title="4.3.1 优化策略对比"></a><strong>4.3.1 优化策略对比</strong></h4><p>主要优化有三个点，增加检索范围，添加重排序模型，设计提示词模板</p>
 <table>
 <thead>
 <tr>
@@ -838,7 +838,7 @@ Generating embeddings: 100%|██████████| 205/205 [00:12&lt;00
 <td>强化约束的多条件模板</td>
 </tr>
 </tbody></table>
-<h4 id="4-2-2-进行后大模型回答效果前后对比"><a href="#4-2-2-进行后大模型回答效果前后对比" class="headerlink" title="4.2.2 进行后大模型回答效果前后对比"></a><strong>4.2.2 进行后大模型回答效果前后对比</strong></h4><p>使用模型：</p>
+<h4 id="4-3-2-进行后大模型回答效果前后对比"><a href="#4-3-2-进行后大模型回答效果前后对比" class="headerlink" title="4.3.2 进行后大模型回答效果前后对比"></a><strong>4.3.2 进行后大模型回答效果前后对比</strong></h4><p>使用模型：</p>
 <ul>
 <li>LLM：Qwen1.5-4B-Chat</li>
 <li>Embedding：text2vec-base-chinese-sentence</li>
@@ -1005,7 +1005,7 @@ response <span class="token operator">=</span> response_synthesizer<span class="
 <p>其实在上面添加的提示词模板内容对于参数量较小的模型来说是不能理解的，因此我们这次测试添加的提示词模板没什么作用，但是如果是参数量比较大的大模型，添加提示词模板还是很有效果的。</p>
 <hr>
 <h2 id="五、RAG效果测试评估体系"><a href="#五、RAG效果测试评估体系" class="headerlink" title="五、RAG效果测试评估体系"></a><strong>五、RAG效果测试评估体系</strong></h2><p>主要对RAG系统进行重排序召回率和端到端效果评估</p>
-<h4 id="5-1-重排序召回率"><a href="#5-1-重排序召回率" class="headerlink" title="5.1 重排序召回率"></a><strong>5.1 重排序召回率</strong></h4><p>测试数据集示例：</p>
+<h3 id="5-1-重排序召回率"><a href="#5-1-重排序召回率" class="headerlink" title="5.1 重排序召回率"></a><strong>5.1 重排序召回率</strong></h3><p>测试数据集示例：</p>
 <pre class="line-numbers language-json" data-language="json"><code class="language-json"># 劳动合同解除类  
 <span class="token punctuation">{</span>  
     <span class="token property">"question"</span><span class="token operator">:</span> <span class="token string">"劳动者可以立即解除劳动合同的情形有哪些？"</span><span class="token punctuation">,</span>  
@@ -1049,7 +1049,7 @@ results <span class="token operator">=</span> <span class="token punctuation">[<
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"目标条款：</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token keyword">case</span><span class="token punctuation">[</span><span class="token string">'relevant_ids'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>  
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"召回率：</span><span class="token interpolation"><span class="token punctuation">{</span>recall<span class="token punctuation">:</span><span class="token format-spec">.1%</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="5-2-端到端条款命中率"><a href="#5-2-端到端条款命中率" class="headerlink" title="5.2 端到端条款命中率"></a><strong>5.2 端到端条款命中率</strong></h4><p>测试数据集示例：</p>
+<h3 id="5-2-端到端条款命中率"><a href="#5-2-端到端条款命中率" class="headerlink" title="5.2 端到端条款命中率"></a><strong>5.2 端到端条款命中率</strong></h3><p>测试数据集示例：</p>
 <pre class="line-numbers language-json" data-language="json"><code class="language-json">E2E_BENCHMARK = <span class="token punctuation">[</span>  
     # 案例<span class="token number">1</span>：劳动合同解除  
     <span class="token punctuation">{</span>  
